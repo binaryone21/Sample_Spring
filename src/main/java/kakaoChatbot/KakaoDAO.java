@@ -1,4 +1,4 @@
-package kakao;
+package kakaoChatbot;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

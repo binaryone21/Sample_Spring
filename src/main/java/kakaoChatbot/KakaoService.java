@@ -1,4 +1,4 @@
-package kakao;
+package kakaoChatbot;
 
 import org.springframework.stereotype.Service;
 

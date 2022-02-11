@@ -1,4 +1,4 @@
-package kakao;
+package kakaoChatbot;
 
 public class UebFaqVO {
 
