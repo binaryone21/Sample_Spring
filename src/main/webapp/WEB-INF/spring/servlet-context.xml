@@ -13,7 +13,7 @@
 
     <!-- SpringWAS 컨테이너가 로드할 컴포넌트 경로 -->
     <mvc:annotation-driven/>
-    <context:component-scan base-package="kakaoChatbot"/>
+    <context:component-scan base-package="seunghee"/>
 
     <!-- resources 경로 -->
     <mvc:resources mapping="/*" location="/resources/"/>
@@ -26,7 +26,7 @@
           p:contentType="application/json;charset=UTF-8"/>
     -->
 
-    <!-- 타일즈 설정 -->
+    <!-- 타일즈 설정
     <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions">
             <list>
@@ -34,15 +34,17 @@
             </list>
         </property>
     </bean>
+     -->
 
-    <!-- 타일즈 뷰리졸버 설정-->
+    <!-- 타일즈 뷰리졸버 설정
     <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"
           p:viewClass="org.springframework.web.servlet.view.tiles3.TilesView"
           p:order="2"/>
+    -->
 
     <!-- ViewResolver 등록 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/jsp/"
+          p:prefix="/WEB-INF/view/"
           p:suffix=".jsp"
           p:order="3" />
 

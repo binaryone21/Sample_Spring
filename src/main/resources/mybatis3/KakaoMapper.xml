@@ -3,7 +3,7 @@
 <mapper namespace="kkMap">
 
         <!--/* 해당하는 조건의 실업급여 FAQ List 조회 */-->
-        <select id="select" statementType="PREPARED" parameterType="kakaoChatbot.UebFaqVO">
+        <select id="select" statementType="PREPARED" parameterType="seunghee.kakaoChatbot.UebFaqVO">
             select * from T
 
         </select>

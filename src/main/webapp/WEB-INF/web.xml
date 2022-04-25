@@ -13,7 +13,7 @@
     <servlet-class> org.springframework.web.servlet.DispatcherServlet </servlet-class>
     <init-param>
       <param-name> contextConfigLocation </param-name>
-      <param-value> /WEB-INF/spring/appServlet/servlet-context.xml </param-value>
+      <param-value> /WEB-INF/spring/servlet-context.xml </param-value>
     </init-param>
     <load-on-startup> 1 </load-on-startup>
   </servlet>
@@ -23,11 +23,12 @@
     <url-pattern> / </url-pattern>
   </servlet-mapping>
 
-
-
-
-
-
+  <!-- ajax 설정
+  <servlet-mapping>
+    <servlet-name> appServlet </servlet-name>
+    <url-pattern> *.ajax </url-pattern>
+  </servlet-mapping>
+  -->
 
   <!-- root-context.xml 설정 -->
   <context-param>

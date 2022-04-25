@@ -1,0 +1,58 @@
+.brd_sc form {
+    height: 30px;
+    margin: 10px 0 20px 0;
+    display: flex;
+}
+.brd_sc label {
+    font-weight: bold;
+    padding: 0.375rem 0.75rem;
+    min-width: 77px;
+    font-size: 13px;
+}
+.brd_sc input {
+    width: 100px;
+    border: none;
+    border-left:1px solid #ced4da;
+    height:28px;
+    padding-left:5px;
+    color:#32363a;
+}
+.brd_sc button {
+    width: 65px;
+    height: 30px;
+    color: white;
+    background: #0A6ED1;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    line-height: 30px;
+}
+.brd_sc *:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.brd_sc_date {
+    height: 30px;
+    background: #E9ECEF;
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+.brd_sc_type {
+    height: 30px;
+    background: #E9ECEF;
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+.brd_sc_type select {
+    width: 100px;
+    padding-left: 5px;
+    border: none;
+    border-left: 1px solid #ced4da;
+    height: 28px;
+}

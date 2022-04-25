@@ -1,4 +1,4 @@
-package kakaoChatbot;
+package seunghee.kakaoChatbot;
 
 import org.springframework.stereotype.Service;
 
