@@ -1,0 +1,12 @@
+.sidebar1_lay_ma {
+    transition: all 0.25s ease-in-out;
+    min-width: 915px;
+    height: 100%;
+    margin-top: 44px;
+}
+.sidebar1_lay_ma[aria-expanded='false'] {
+    margin-left: 240px;
+}
+.sidebar1_lay_ma[aria-expanded='true'] {
+    margin-left: 46px;
+}

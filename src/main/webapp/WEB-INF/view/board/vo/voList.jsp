@@ -2,36 +2,32 @@
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<!DOCTYPE html>
 <html>
 <head>
     <title>Board VO List</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-    </style>
-    <link rel="stylesheet" href="/board/vo/css/search.css">
-    <link rel="stylesheet" href="/board/vo/css/table.css">
+    <link rel="stylesheet" href="/layout/common.css">
+    <link rel="stylesheet" href="/layout/search/search_1.css">
+    <link rel="stylesheet" href="/layout/table/table_1.css">
     <link rel="stylesheet" href="/board/vo/css/paging.css">
     <script src="/board/vo/js/board.js" defer></script>
 </head>
-<body>
+<body style="margin: 40px; height:calc(100% - 80px);">
 
-    <%-- 검색 조건 --%>
-    <article class="brd_sc">
+    <%-- Search 1 --%>
+    <article class="search1_com_sc">
         <form id="searchForm">
-            <div class="brd_sc_date" style="margin-right:30px">
+            <div class="search1_com_sc_date" style="margin-right:30px">
                 <label>시작 일시</label>
                 <input type="date" name="startDate" value="${TP_Search.startDate}">
                 <input type="time" name="startTime" value="${TP_Search.startTime}">
             </div>
-            <div class="brd_sc_date" style="margin-right:30px">
+            <div class="search1_com_sc_date" style="margin-right:30px">
                 <label>종료 일시</label>
                 <input type="date" name="endDate" value="${TP_Search.endDate}">
                 <input type="time" name="endTime" value="${TP_Search.endTime}">
             </div>
-            <div class="brd_sc_type" style="margin-right:10px">
+            <div class="search1_com_sc_type" style="margin-right:10px">
                 <label>검색 내용</label>
                 <select name="searchType" value="${TP_Search.searchType}">
                     <option value="NAME">이름</option>
@@ -49,13 +45,14 @@
         </form>
     </article>
 
-    <%-- 테이블 --%>
-    <article class="brd_tb" style="height:300px;">
+    <%-- Table 1 --%>
+    <article class="table1_com_tb" style="height:300px;">
         <div>
             <span>총 게시물</span>
-            <span>${TP_Search.totalNo}</span>
+            <span>54</span>
+            <%--<span>${TP_Search.totalNo}</span>--%>
         </div>
-        <div class="brd_tb_header">
+        <div class="table1_com_tb_header">
             <div style="width:70px">No</div>
             <div style="width:130px">이름</div>
             <div style="width:130px">나이</div>
@@ -63,7 +60,7 @@
             <div style="width:calc(100% - 460px)">내용</div>
         </div>
 
-        <div class="brd_tb_body">
+        <div class="table1_com_tb_body">
             <table>
                 <colgroup>
                     <col style="width:70px">

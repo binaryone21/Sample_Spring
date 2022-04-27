@@ -13,10 +13,13 @@
 
     <!-- SpringWAS 컨테이너가 로드할 컴포넌트 경로 -->
     <mvc:annotation-driven/>
-    <context:component-scan base-package="seunghee"/>
+    <context:component-scan base-package="seunghee">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
 
     <!-- resources 경로 -->
-    <mvc:resources mapping="/*" location="/resources/"/>
+    <mvc:resources mapping="/**" location="/resources/"/>
 
     <!-- ajax 설정 // 인텔리에선 필요없나?
     <bean id="beanNameResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"

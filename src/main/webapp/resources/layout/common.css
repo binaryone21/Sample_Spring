@@ -1,0 +1,47 @@
+html, body {
+    height:100%;
+}
+* {
+    box-sizing: border-box;
+}
+
+/* a */
+a {
+    text-decoration: none;
+    color: #32363A;
+}
+* a:link, * a:focus, * a:active, * a:hover {
+    color: black;
+    background: none;
+    text-decoration: none;
+}
+
+button, input, select {
+    margin: 0;
+    line-height:inherit;
+}
+
+/* button */
+* button:focus, * button:active, * button:hover {
+    outline: none;
+}
+
+
+/* input */
+* input:focus, * input:active, * input:hover {
+    outline: none;
+}
+
+
+/* select */
+* select:focus, * select:active, * select:hover {
+    outline: none;
+}
+
+
+/* list */
+ul, ol {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}

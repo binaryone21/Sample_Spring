@@ -10,6 +10,9 @@
     <util:properties id="jdbc" location="WEB-INF/jdbc.properties"/>
     <context:property-placeholder location="/WEB-INF/jdbc.properties" />
      -->
+<!--    <context:component-scan base-package="seunghee">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>-->
 
     <!-- JDBC 연결 -->
     <bean id="sampleMaria" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">

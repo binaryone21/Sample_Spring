@@ -1,0 +1,49 @@
+.sidebar1_lay_hd {
+    width:100%;
+    min-width: 800px;
+    height: 44px;
+    background-color: #354A5F;
+    color: white;
+    line-height: 40px;
+    position: fixed;
+    top: 0;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.sidebar1_lay_hd_toggle {
+    float: left;
+    width: 62px;
+    padding-left: 11px;
+    font-size: 20px;
+}
+.sidebar1_lay_hd_toggle span:hover {
+    cursor: pointer;
+}
+
+.sidebar1_lay_hd_title {
+    float: left;
+    width: calc(100% - 230px);
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.sidebar1_lay_hd_icons {
+    width: 168px;
+    float: right;
+    font-size: 18px;
+    color: white;
+}
+.sidebar1_lay_hd_icons {
+    font-size: 15px;
+}
+.sidebar1_lay_hd_icons div {
+    float: left;
+}
+.sidebar1_lay_hd_icons button {
+    color: white;
+}
+.sidebar1_lay_hd_icons button:hover {
+    color: white;
+}
