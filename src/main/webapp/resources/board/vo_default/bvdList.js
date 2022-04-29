@@ -68,7 +68,7 @@ function searchBoard(num) {
     pageTarget.setAttribute("name", "pageTarget")
     pageTarget.value = num
     let searchForm = document.getElementById('searchForm')
-    searchForm.setAttribute('action', '/board/vo/voList')
+    searchForm.setAttribute('action', '/board/vo_default/list')
     searchForm.setAttribute('method', 'POST')
     searchForm.submit()
 }

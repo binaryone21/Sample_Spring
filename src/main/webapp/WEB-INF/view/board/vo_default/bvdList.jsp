@@ -5,12 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Board VO List</title>
+    <title>Board VO Default List</title>
     <link rel="stylesheet" href="/layout/common.css">
     <link rel="stylesheet" href="/layout/search/search_1.css">
     <link rel="stylesheet" href="/layout/table/table_1.css">
-    <link rel="stylesheet" href="/board/vo/css/paging.css">
-    <script src="/board/vo/js/board.js" defer></script>
+    <link rel="stylesheet" href="/board/vo_default/paging.css">
+    <script src="/layout/search/search_1.js" defer></script>
+    <script src="/board/vo_default/bvdList.js" defer></script>
 </head>
 <body style="margin: 40px; height:calc(100% - 80px);">
 
@@ -19,28 +20,28 @@
         <form id="searchForm">
             <div class="search1_com_sc_date" style="margin-right:30px">
                 <label>시작 일시</label>
-                <input type="date" name="startDate" value="${TP_Search.startDate}">
-                <input type="time" name="startTime" value="${TP_Search.startTime}">
+                <input type="date" name="startDate" value="${search.startDate}">
+                <input type="time" name="startTime" value="${search.startTime}">
             </div>
             <div class="search1_com_sc_date" style="margin-right:30px">
                 <label>종료 일시</label>
-                <input type="date" name="endDate" value="${TP_Search.endDate}">
-                <input type="time" name="endTime" value="${TP_Search.endTime}">
+                <input type="date" name="endDate" value="${search.endDate}">
+                <input type="time" name="endTime" value="${search.endTime}">
             </div>
             <div class="search1_com_sc_type" style="margin-right:10px">
                 <label>검색 내용</label>
-                <select name="searchType" value="${TP_Search.searchType}">
+                <select name="searchType" value="${search.searchType}">
                     <option value="NAME">이름</option>
                     <option value="AGE">나이</option>
                 </select>
-                <input type="text" style="width:250px" value="${TP_Search.searchText}">
+                <input type="text" name="searchText" style="width:250px" value="${search.searchText}">
             </div>
             <button type="button" id="searchBtn">검색</button>
-            <input  type="hidden" id="naviNo"    name="naviNo"    value="${TP_Search.naviNo}">
-            <input  type="hidden" id="pageTotal" name="pageTotal" value="${TP_Search.pageTotal}">
-            <input  type="hidden" id="pageNo"    name="pageNo"    value="${TP_Search.pageNo}">
-            <input  type="hidden" id="pageStart" name="pageStart" value="${TP_Search.pageStart}">
-            <input  type="hidden" id="pageEnd"   name="pageEnd"   value="${TP_Search.pageEnd}">
+            <input  type="hidden" id="naviNo"    name="naviNo"    value="${search.naviNo}">
+            <input  type="hidden" id="pageTotal" name="pageTotal" value="${search.pageTotal}">
+            <input  type="hidden" id="pageNo"    name="pageNo"    value="${search.pageNo}">
+            <input  type="hidden" id="pageStart" name="pageStart" value="${search.pageStart}">
+            <input  type="hidden" id="pageEnd"   name="pageEnd"   value="${search.pageEnd}">
             <input  type="hidden" id="pageTarget">
         </form>
     </article>
@@ -48,9 +49,8 @@
     <%-- Table 1 --%>
     <article class="table1_com_tb" style="height:300px;">
         <div>
-            <span>총 게시물</span>
-            <span>54</span>
-            <%--<span>${TP_Search.totalNo}</span>--%>
+            <span>총 게시물 </span>
+            <span>${search.totalNo}</span>
         </div>
         <div class="table1_com_tb_header">
             <div style="width:70px">No</div>
@@ -70,12 +70,12 @@
                     <col style="width:calc(100% - 460px)">
                 </colgroup>
                 <tbody>
-                    <c:forEach var="TP_One" items="${TP_List}">
+                    <c:forEach var="TP_View" items="${TP_List}">
                         <tr>
-                            <td>${TP_One.TP_PK}</td>
-                            <td>${TP_One.TP_NAME}</td>
-                            <td>${TP_One.TP_AGE}</td>
-                            <td>${TP_One.TP_JOB}</td>
+                            <td>${TP_View.tp_pk}</td>
+                            <td>${TP_View.tp_name}</td>
+                            <td>${TP_View.tp_age}</td>
+                            <td>${TP_View.tp_job}</td>
                             <td>내용</td>
                         </tr>
                     </c:forEach>

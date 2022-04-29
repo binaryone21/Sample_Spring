@@ -1,15 +1,15 @@
-package seunghee.board.vo;
+package seunghee.board.vo_default;
 
 import lombok.Data;
 
 @Data
-public class SearchVO {
+public class BvdSearchVO {
     private int pagePer;	    				// 화면당 보여줄 게시물의 수
     private int naviNo;			    			// 하단 네비게이션의 수
     private int pageTarget;						// 조회하려는 페이지 번호
-    private String startDate = "2022-04-01";	// 조회 시작 날짜
+    private String startDate = "2022-01-01";	// 조회 시작 날짜
     private String startTime = "00:00";			// 조회 시작 시간
-    private String endDate = "2022-04-30";		// 조회 끝 날짜
+    private String endDate = "2022-12-31";		// 조회 끝 날짜
     private String endTime = "23:59";			// 조회 끝 시간
     private String searchType;					// 검색 조건
     private String searchText;					// 검색 내용
@@ -21,7 +21,7 @@ public class SearchVO {
     private int pageEnd;						// 하단 네비게이션 끝 페이지 번호
 
     // 기본 값 설정
-    SearchVO() {
+    BvdSearchVO() {
         pagePer = 20;
         naviNo = 5;
         if(startDate == null) { startDate = "2022-04-01"; }
