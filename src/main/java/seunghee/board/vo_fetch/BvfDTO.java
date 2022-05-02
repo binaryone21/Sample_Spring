@@ -1,9 +1,9 @@
-package seunghee.board.vo_petch;
+package seunghee.board.vo_fetch;
 
 import lombok.Data;
 
 @Data
-public class BvpDTO {
+public class BvfDTO {
     private String tp_pk;
     private String tp_age;
     private String tp_name;

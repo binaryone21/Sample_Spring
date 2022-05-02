@@ -76,18 +76,18 @@
         pageTarget.value = num
 
         let json = form2json('searchForm')
-        fetch("/board/vo_petch/list/petch", {
+        fetch("/board/vo_fetch/list/fetch", {
             method: "POST",
+            body: json,
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json, text/html",
                 credentials: "same-origin",
                 mode: "cors"
-            },
-            body: json,
+            }
         })
-            .then((res) => res.json()
-                .then((list) => writeBoard(list)))
+            .then((res) => res.json())
+            .then((list) => writeBoard(list))
             .catch((err) => console.log("Petch Error >> ", err))
     }
 

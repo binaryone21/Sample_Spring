@@ -1,9 +1,9 @@
-package seunghee.board.vo_petch;
+package seunghee.board.vo_fetch;
 
 import lombok.Data;
 
 @Data
-public class BvpSearchVO {
+public class BvfSearchVO {
     private int pagePer;	    				// 화면당 보여줄 게시물의 수
     private int naviNo;			    			// 하단 네비게이션의 수
     private int pageTarget;						// 조회하려는 페이지 번호
@@ -21,7 +21,7 @@ public class BvpSearchVO {
     private int pageEnd;						// 하단 네비게이션 끝 페이지 번호
 
     // 기본 값 설정
-    BvpSearchVO() {
+    BvfSearchVO() {
         pagePer = 20;
         naviNo = 5;
         if(startDate == null) { startDate = "2022-04-01"; }

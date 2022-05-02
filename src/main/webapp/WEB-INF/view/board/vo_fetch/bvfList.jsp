@@ -5,14 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Board VO Petch List</title>
+    <title>Board VO Fetch List</title>
     <link rel="stylesheet" href="/layout/common.css">
     <link rel="stylesheet" href="/layout/search/search_1.css">
     <link rel="stylesheet" href="/layout/table/table_1.css">
     <link rel="stylesheet" href="/board/vo/css/paging.css">
     <script src="/common/js/vanilla.js"></script>
     <script src="/layout/search/search_1.js" defer></script>
-    <script src="/board/vo_petch/bvpList.js" defer></script>
+    <script src="/board/vo_fetch/bvfList.js" defer></script>
 </head>
 <body style="margin: 40px; height:calc(100% - 80px);">
 

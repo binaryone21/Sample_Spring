@@ -1,4 +1,4 @@
-package seunghee.board.vo_petch;
+package seunghee.board.vo_fetch;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,19 +7,19 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class BvpDao {
+public class BvfDao {
 
     @Autowired
     private SqlSession sqlSession;
 
     // 게시판 목록조회 개수
-    public int selectBVP_PK_Count(BvpSearchVO searchVO) {
-        return sqlSession.selectOne("bvpMap.selectBVP_PK_Count", searchVO);
+    public int selectBVF_PK_Count(BvfSearchVO searchVO) {
+        return sqlSession.selectOne("bvfMap.selectBVF_PK_Count", searchVO);
     }
 
     // 게시판 목록조회
-    public List<BvpDTO> arraysBVP(BvpSearchVO searchVO) {
-        return sqlSession.selectList("bvpMap.arraysBVP", searchVO);
+    public List<BvfDTO> arraysBVF(BvfSearchVO searchVO) {
+        return sqlSession.selectList("bvfMap.arraysBVF", searchVO);
     }
 
 }
