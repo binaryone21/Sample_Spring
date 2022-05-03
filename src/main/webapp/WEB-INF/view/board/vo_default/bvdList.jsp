@@ -80,21 +80,6 @@
             </table>
         </div>
     </article>
-<%--
-
-    <article class="brd_pg">
-        <div id="pageFoward"> < </div>
-        <c:forEach var="num" begin="${search.pageStart}" end="${search.pageEnd}" step="1">
-            <c:if test="${num <= search.pageTotal}">
-                <div class="brd_pg_navi" value="${num}">${num}</div>
-            </c:if>
-            <c:if test="${num > search.pageTotal}">
-                <div class="brd_pg_navi brd_pg_hidden"></div>
-            </c:if>
-        </c:forEach>
-        <div id="pageBackward"> > </div>
-    </article>
---%>
 
     <article class="paging1_com_pg">
         <div id="pageFoward"> < </div>
