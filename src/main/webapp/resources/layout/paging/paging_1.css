@@ -22,6 +22,13 @@
     background: #f5faff;
     cursor:pointer;
 }
+.paging1_com_pg_act {
+    background: black !important;
+    color: white !important;
+}
+.paging1_com_pg_act:hover {
+    background: black !important;
+}
 .paging1_com_pg_none {
     background: #eee !important;
 }

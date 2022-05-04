@@ -2,7 +2,7 @@
 function form2json(form_id) {
     let form = document.getElementById(form_id)
     if(form == null) {
-        console.log('ERRER >>', form_id, 'is not form or not found')
+        console.log('ERROR [vanilla form2json] >>', form_id, 'is not form or not found')
         return
     }
 

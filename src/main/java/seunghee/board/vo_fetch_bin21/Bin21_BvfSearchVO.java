@@ -1,9 +1,9 @@
-package seunghee.board.vo_fetch;
+package seunghee.board.vo_fetch_bin21;
 
 import lombok.Data;
 
 @Data
-public class BvfSearchVO {
+public class Bin21_BvfSearchVO {
     private String startDate = "2022-01-01";	// 조회 시작 날짜
     private String startTime = "00:00";			// 조회 시작 시간
     private String endDate = "2022-12-31";		// 조회 끝 날짜
@@ -22,7 +22,7 @@ public class BvfSearchVO {
     private int pageEnd;						// 하단 네비게이션 끝 페이지 번호
 
     // 기본 값 설정
-    BvfSearchVO() {
+    Bin21_BvfSearchVO() {
         if(startDate == null)   { startDate = "2022-04-01"; }
         if(startTime == null)   { startTime = "00:00"; }
         if(endDate == null)     { endDate = "2022-12-30"; }

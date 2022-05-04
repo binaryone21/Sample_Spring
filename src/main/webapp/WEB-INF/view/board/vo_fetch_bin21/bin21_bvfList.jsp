@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="/layout/table/table_1.css">
     <link rel="stylesheet" href="/layout/paging/paging_1.css">
     <script src="/common/js/vanilla.js"></script>
+    <script src="/common/js/bin21.js"></script>
     <script src="/layout/search/search_1.js" defer></script>
-    <script src="/board/vo_fetch/bvfList.js" defer></script>
+    <script src="/board/vo_fetch_bin21/bin21_bvfList.js" defer></script>
 </head>
 <body style="margin: 40px; height:calc(100% - 80px);">
 
