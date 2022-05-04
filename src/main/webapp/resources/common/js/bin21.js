@@ -72,7 +72,7 @@ let bin21 = {
 
         table.innerHTML = html
     },
-    writeNavi: function (navis, search) {
+    writeNavi: function (navis, search, func) {
         let Forward = document.getElementById(navis[0])
         let Numbers = document.getElementsByClassName(navis[1])
         let Backward = document.getElementById(navis[2])
@@ -82,7 +82,7 @@ let bin21 = {
             let num = Number(search.pageStart) + i
             if(num <= search.pageTotal) {
                 Numbers[i].innerHTML = num
-                Numbers[i].addEventListener('click', () => searchBoard(num))
+                Numbers[i].addEventListener('click', () => func(num))
                 Numbers[i].setAttribute('class', 'pageNumbers')
                 // 현재 페이지
                 if(num == search.pageNo) {
@@ -96,17 +96,17 @@ let bin21 = {
         // < 설정
         if(search.pageStart != 1) {
             Forward.addEventListener('click', () =>
-                searchBoard(Number(search.pageStart) - Number(search.pageNavi)))
+                func(Number(search.pageStart) - Number(search.pageNavi)))
         }
 
         // > 설정
         if(search.pageEnd != search.pageTotal) {
             if(Number(search.pageEnd) + Number(search.pageNavi) <= search.pageTotal) {
                 Backward.addEventListener('click', () =>
-                    searchBoard(Number(search.pageStart) + Number(search.pageNavi)))
+                    func(Number(search.pageStart) + Number(search.pageNavi)))
             } else {
                 Backward.addEventListener('click', () =>
-                    searchBoard(Number(search.pageTotal)) )
+                    func(Number(search.pageTotal)) )
             }
         }
     },

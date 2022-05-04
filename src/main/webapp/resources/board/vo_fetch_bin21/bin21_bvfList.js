@@ -49,5 +49,5 @@
         
         // PageNavi 영역
         let navis = ['pageForward', 'pageNumbers', 'pageBackward']
-        bin21.writeNavi(navis, map.search)
+        bin21.writeNavi(navis, map.search, searchBoard)
     }

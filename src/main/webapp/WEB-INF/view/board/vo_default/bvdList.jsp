@@ -84,8 +84,11 @@
     <article class="paging1_com_pg">
         <div id="pageFoward"> < </div>
         <c:forEach var="num" begin="${search.pageStart}" end="${search.pageEnd}" step="1">
-            <c:if test="${num le search.pageTotal}">
+            <c:if test="${num lt search.pageTotal}">
                 <div value="${num}">${num}</div>
+            </c:if>
+            <c:if test="${num eq search.pageTotal}">
+                <div class="paging1_com_pg_act" value="${num}">${num}</div>
             </c:if>
             <c:if test="${num gt search.pageTotal}">
                 <div class="paging1_com_pg_none"></div>
