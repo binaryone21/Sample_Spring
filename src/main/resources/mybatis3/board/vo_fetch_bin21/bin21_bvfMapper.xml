@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bin21_bvfMap">
+
+        <!-- 게시판 목록조회 -->
+        <select id="arraysBVF" statementType="PREPARED"
+                parameterType="seunghee.board.vo_fetch_bin21.Bin21_BvfSearchVO"
+                resultType="seunghee.board.vo_fetch_bin21.Bin21_BvfDTO">
+            select * from T_PERSON
+                where 1 = 1
+                    <if test="searchType == 'NAME' and searchText != '' and searchText != null">
+                        and TP_NAME like concat('%', #{searchText}, '%')
+                    </if>
+                    <if test="searchType == 'AGE' and searchText != '' and searchText != null">
+                        and TP_AGE like concat('%', #{searchText}, '%')
+                    </if>
+                    order by TP_PK desc
+                        limit ${startNo}, ${pagePer}
+        </select>
+
+        <!-- 게시판 목록조회 개수 -->
+        <select id="selectBVF_PK_Count" statementType="PREPARED"
+                parameterType="seunghee.board.vo_fetch_bin21.Bin21_BvfSearchVO"
+                resultType="int">
+            select count(TP_PK) from T_PERSON
+                where 1 = 1
+                    <if test="searchType == 'NAME' and searchText != '' and searchText != null">
+                        and TP_NAME like concat('%', #{searchText}, '%')
+                    </if>
+                    <if test="searchType == 'AGE' and searchText != '' and searchText != null">
+                        and TP_AGE like concat('%', #{searchText}, '%')
+                    </if>
+        </select>
+
+</mapper>
