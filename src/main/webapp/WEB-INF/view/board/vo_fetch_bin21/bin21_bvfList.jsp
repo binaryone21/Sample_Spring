@@ -75,7 +75,7 @@
         </div>
     </article>
 
-    <article class="paging1_com_pg">
+    <article class="paging1_com_pg" id="boardPage">
         <div id="pageForward"> < </div>
         <c:forEach var="num" begin="1" end="5" step="1">
             <div class="pageNumbers"></div>

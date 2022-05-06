@@ -45,9 +45,10 @@
     function writeBoard(map) {
         // Table header 영역
         let header = ['tp_pk', 'tp_name', 'tp_age', 'tp_job', '']
-        bin21.writeTable(header, 'boardTable', map.list)
-        
+        bin21.writeTable('boardTable', header, map.list)
+        // bin21.writeTableFn(header, 'boardTable', map.list, 'searchView', 'tp_pk')
+
         // PageNavi 영역
         let navis = ['pageForward', 'pageNumbers', 'pageBackward']
-        bin21.writeNavi(navis, map.search, searchBoard)
+        bin21.writeNavi('boardPage', navis, map.search, searchBoard)
     }

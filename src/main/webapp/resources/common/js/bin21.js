@@ -58,12 +58,12 @@ let bin21 = {
                 .catch((err) => console.log('ERROR [bin21Fetch] >>', err))
         }
     },
-    writeTable: function(header, table_id, list) {
+    writeTable: function(table_id, header, list) {
         let table = document.getElementById(table_id)
 
         let html = "";
         for(let view of list) {
-            html += "<tr>";
+            html += "<tr>"
             for(let i=0; i<header.length; i++) {
                 html += "<td>" + view[header[i]] + "</td>";
             }
@@ -72,41 +72,59 @@ let bin21 = {
 
         table.innerHTML = html
     },
-    writeNavi: function (navis, search, func) {
-        let Forward = document.getElementById(navis[0])
-        let Numbers = document.getElementsByClassName(navis[1])
-        let Backward = document.getElementById(navis[2])
+    writeTableFn: function(table_id, header, list, fn, key) {
+        let table = document.getElementById(table_id)
+
+        let html = "";
+        for(let view of list) {
+            if(fn == null) {
+                html += "<tr>"
+            } else {
+                html += '<tr onClick="' + fn + '(' + view[key] + ')">'
+            }
+            for(let i=0; i<header.length; i++) {
+                html += "<td>" + view[header[i]] + "</td>";
+            }
+            html += "</tr>";
+        }
+
+        table.innerHTML = html
+    },
+    writeNavi: function (page_id, navis, search, fn) {
+        let forward = document.getElementById(page_id).getElementById(navis[0])
+        let numbers = document.getElementById(page_id).getElementsByClassName(navis[1])
+        let backward = document.getElementById(page_id).getElementById(navis[2])
 
         // 페이지 네비게이션 설정
         for(let i=0; i<search.pageNavi; i++) {
             let num = Number(search.pageStart) + i
             if(num <= search.pageTotal) {
-                Numbers[i].innerHTML = num
-                Numbers[i].addEventListener('click', () => func(num))
-                Numbers[i].setAttribute('class', 'pageNumbers')
+                numbers[i].innerHTML = num
+                numbers[i].addEventListener('click', () => fn(num))
+                numbers[i].setAttribute('class', 'pageNumbers')
                 // 현재 페이지
                 if(num == search.pageNo) {
-                    Numbers[i].setAttribute('class', 'pageNumbers paging1_com_pg_act')
+                    numbers[i].setAttribute('class', 'pageNumbers paging1_com_pg_act')
                 }
             } else {
-                Numbers[i].setAttribute('class', 'pageNumbers paging1_com_pg_none')
+                numbers[i].setAttribute('class', 'pageNumbers paging1_com_pg_none')
             }
         }
 
         // < 설정
         if(search.pageStart != 1) {
-            Forward.addEventListener('click', () =>
-                func(Number(search.pageStart) - Number(search.pageNavi)))
+            forward.addEventListener('click', () =>
+                fn(Number(search.pageStart) - Number(search.pageNavi)))
         }
 
         // > 설정
         if(search.pageEnd != search.pageTotal) {
             if(Number(search.pageEnd) + Number(search.pageNavi) <= search.pageTotal) {
-                Backward.addEventListener('click', () =>
-                    func(Number(search.pageStart) + Number(search.pageNavi)))
+                backward.addEventListener('click', () =>
+                    fn(Number(search.pageStart) + Number(search.pageNavi)))
             } else {
-                Backward.addEventListener('click', () =>
-                    func(Number(search.pageTotal)) )
+                backward.addEventListener('click', () =>
+                    fn(Number(search.pageTotal)) )
             }
         }
     },
