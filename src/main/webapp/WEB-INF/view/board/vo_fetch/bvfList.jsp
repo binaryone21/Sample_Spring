@@ -59,17 +59,14 @@
         </div>
 
         <div class="table1_com_tb_body">
-            <table>
-                <colgroup>
-                    <col style="width:70px">
-                    <col style="width:130px">
-                    <col style="width:130px">
-                    <col style="width:130px">
-                    <col style="width:calc(100% - 460px)">
-                </colgroup>
-                <tbody id="boardTable">
-                    <%-- 테이블 영역입니다. --%>
-                </tbody>
+            <table id="boardTable">
+                <tr>
+                    <td style="width:70px"  name="tp_pk"></td>
+                    <td style="width:130px" name="tp_age"></td>
+                    <td style="width:130px" name="tp_name"></td>
+                    <td style="width:130px" name="tp_job"></td>
+                    <td style="width:calc(100% - 460px)"></td>
+                </tr>
             </table>
         </div>
     </article>

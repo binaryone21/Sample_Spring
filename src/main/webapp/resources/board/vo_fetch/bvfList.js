@@ -16,7 +16,7 @@
     document.addEventListener('DOMContentLoaded', startBoard)
 
     // 검색 버튼 클릭시
-    searchBtn.addEventListener('click', () => searchBoard(1))
+    searchBtn.addEventListener('click', () => searchBoardList(1))
 
 
 /*** Function *****************************************************************/
@@ -25,7 +25,7 @@
     // 화면 초기 설정
     function startBoard() {
         setBoard()
-        searchBoard(1)
+        searchBoardList(1)
     }
 
 
@@ -36,7 +36,7 @@
     }
     
     // 검색조건을 통한 Board 조회
-    function searchBoard(pageNo) {
+    function searchBoardList(pageNo) {
         document.getElementById('pageNo').value = pageNo
 
         let json = form2json('searchForm')
@@ -57,25 +57,41 @@
 
     // 검색조건을 통한 Board 입력
     function writeBoard(map) {
-        writeBoardTable(map.list)
+        writeBoardList(map.list)
         writeBoardNavi(map.search)
     }
 
     // 검색 조건을 통한 Table 입력
-    function writeBoardTable(list) {
-        let boardTable = document.getElementById('boardTable')
-        let html = ''
-        for(let view of list) {
-            html += "<tr>";
-            html += "<td>" + view.tp_pk + "</td>";
-            html += "<td>" + view.tp_name + "</td>";
-            html += "<td>" + view.tp_age + "</td>";
-            html += "<td>" + view.tp_job + "</td>";
-            html += "<td>" + "내용" + "</td>";
-            html += "</tr>";
+    function writeBoardList(list) {
+        let table = document.getElementById('boardTable')
+        while (table.rows[1]) {
+            table.deleteRow(0)
         }
-        boardTable.innerHTML = html
+        let tr = table.querySelector('tr')
+        tr.style.display = 'none'
+        for (let i in list) {
+            let view = list[i]
+            table.insertRow(i)
+            table.rows[i].innerHTML = tr.innerHTML
+            table.rows[i].addEventListener('click', () => searchBoardView(view['tp_pk']))
+            for (let idx in view) {
+                let td = table.rows[i].querySelector('*[name="' + idx + '"]')
+                if (td != undefined) {
+                    td.setAttribute('value', view[idx])
+                    td.innerHTML = view[idx]
+                }
+            }
+        }
     }
+
+    // 검색 조건을 통한 view 조회
+    function searchBoardView(tp_pk) {
+        alert(tp_pk+' view 조회')
+    }
+
+
+
+
 
     // 네비게이션 설정
     function writeBoardNavi(search) {
