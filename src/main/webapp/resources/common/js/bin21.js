@@ -58,37 +58,28 @@ let bin21 = {
                 .catch((err) => console.log('ERROR [bin21Fetch] >>', err))
         }
     },
-    writeTable: function(table_id, header, list) {
+    writeList : function(table_id, list, fn, key) {
         let table = document.getElementById(table_id)
-
-        let html = "";
-        for(let view of list) {
-            html += "<tr>"
-            for(let i=0; i<header.length; i++) {
-                html += "<td>" + view[header[i]] + "</td>";
-            }
-            html += "</tr>";
+        while(table.rows[1]) {
+            table.deleteRow(0)
         }
-
-        table.innerHTML = html
-    },
-    writeTableFn: function(table_id, header, list, fn, key) {
-        let table = document.getElementById(table_id)
-
-        let html = "";
-        for(let view of list) {
-            if(fn == null) {
-                html += "<tr>"
-            } else {
-                html += '<tr onClick="' + fn + '(' + view[key] + ')">'
+        let tr = table.querySelector('tr')
+        tr.style.display = 'none'
+        for(let i in list) {
+            let view = list[i]
+            table.insertRow(i)
+            table.rows[i].innerHTML = tr.innerHTML
+            if(fn != null) {
+                table.rows[i].addEventListener('click', () => fn(view[key]))
             }
-            for(let i=0; i<header.length; i++) {
-                html += "<td>" + view[header[i]] + "</td>";
+            for(let idx in view) {
+                let td = table.rows[i].querySelector('*[name="' + idx +'"]')
+                if(td != undefined) {
+                    td.setAttribute('value', view[idx])
+                    td.innerHTML=view[idx]
+                }
             }
-            html += "</tr>";
         }
-
-        table.innerHTML = html
     },
     writeNavi: function (page_id, navis, search, fn) {
         let forward = document.getElementById(page_id).getElementById(navis[0])

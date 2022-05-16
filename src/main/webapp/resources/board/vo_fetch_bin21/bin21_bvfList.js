@@ -43,12 +43,14 @@
 
     // 검색조건을 통한 Board 입력
     function writeBoard(map) {
-        // Table header 영역
-        let header = ['tp_pk', 'tp_name', 'tp_age', 'tp_job', '']
-        bin21.writeTable('boardTable', header, map.list)
-        // bin21.writeTableFn(header, 'boardTable', map.list, 'searchView', 'tp_pk')
+        bin21.writeList('boardTable', map.list, searchBoardView, 'tp_pk')
 
         // PageNavi 영역
         let navis = ['pageForward', 'pageNumbers', 'pageBackward']
         bin21.writeNavi('boardPage', navis, map.search, searchBoard)
+    }
+
+    // 검색조건을 통한 View 조회
+    function searchBoardView(tp_pk) {
+        alert(tp_pk + ' view 조회')
     }
