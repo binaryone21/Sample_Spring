@@ -4,9 +4,15 @@
 /*** Global Variable **********************************************************/
 
 
-    let searchBtn = document.getElementById('searchBtn')            // 검색 버튼
     let pagePer = 20
     let pageNavi = 5
+    let searchText = document.getElementById('searchText')          // 검색 내용
+    let searchBtn = document.getElementById('searchBtn')            // 검색 버튼
+    let newBoardBtn = document.getElementById('newBoardBtn')        // 신규 버튼
+    let savBoardBtn = document.getElementById('savBoardBtn')        // 저장 버튼
+    let delBoardBtn = document.getElementById('delBoardBtn')        // 삭제 버튼
+
+
 
 
 /*** Event ********************************************************************/
@@ -15,8 +21,20 @@
     // 페이지 로딩시
     document.addEventListener('DOMContentLoaded', startBoard)
 
+    // 검색 엔터시
+    searchText.addEventListener('keyup', searchEnter)
+
     // 검색 버튼 클릭시
     searchBtn.addEventListener('click', () => searchBoardList(1))
+
+    // 신규 버튼 클릭시
+    newBoardBtn.addEventListener('click', clearView)
+
+    // 수정 버튼 클릭시
+    savBoardBtn.addEventListener('click', saveView)
+
+    // 삭제 버튼 클릭시
+    delBoardBtn.addEventListener('click', deleteView)
 
 
 /*** Function *****************************************************************/
@@ -24,17 +42,20 @@
 
     // 화면 초기 설정
     function startBoard() {
-        setBoard()
-        searchBoardList(1)
-    }
-
-
-    // 화면 페이징 정보 설정
-    function setBoard() {
         document.getElementById('pagePer').value = pagePer
         document.getElementById('pageNavi').value = pageNavi
+        searchBoardList(1)
+        searchText.focus()
     }
-    
+
+    // 검색내용 엔터누를시 조회
+    function searchEnter() {
+        if(window.event.keyCode == 13) searchBoardList(1)
+    }
+
+
+    /** 여기까지 */
+
     // 검색조건을 통한 Board 조회
     function searchBoardList(pageNo) {
         document.getElementById('pageNo').value = pageNo
@@ -63,7 +84,7 @@
 
     // 검색 조건을 통한 Table 입력
     function writeBoardList(list) {
-        let table = document.getElementById('boardTable')
+        let table = document.getElementById('boardList')
         while (table.rows[1]) {
             table.deleteRow(0)
         }

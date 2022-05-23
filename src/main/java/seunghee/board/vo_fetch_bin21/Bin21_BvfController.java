@@ -16,12 +16,14 @@ public class Bin21_BvfController {
     @Autowired
     private Bin21_BvfService bvfSvc;
 
+    // Board 화면조회
     @RequestMapping("/board/vo_fetch_bin21/list")
     public String BVFList(Bin21_BvfSearchVO searchVO, Model model) {
         model.addAttribute("search", searchVO);
         return "board/vo_fetch_bin21/bin21_bvfList";
     }
 
+    // Board 목록 fetch
     @ResponseBody
     @RequestMapping("/board/vo_fetch_bin21/list/fetch")
     public Map<String, Object> BVFListFetch(@RequestBody Bin21_BvfSearchVO searchVO) {
@@ -31,4 +33,36 @@ public class Bin21_BvfController {
         map.put("list", bvfSvc.arraysBVF(searchVO));
         return map;
     }
+
+    // Board 상세 fetch
+    @ResponseBody
+    @RequestMapping("/board/vo_fetch_bin21/view/fetch")
+    public Bin21_BvfDTO BVFViewFetch(@RequestBody String tp_pk) {
+        return bvfSvc.selectBVF(tp_pk);
+    }
+
+    // Board 등록 fetch
+    @ResponseBody
+    @RequestMapping("/board/vo_fetch_bin21/insert/fetch")
+    public String BVFInsertFetch(@RequestBody Bin21_BvfDTO view) {
+        System.out.println(view.toString());
+        return bvfSvc.insertBVF(view);
+    }
+
+    // Board 수정 fetch
+    @ResponseBody
+    @RequestMapping("/board/vo_fetch_bin21/update/fetch")
+    public String BVFUpdateFetch(@RequestBody Bin21_BvfDTO view) {
+        System.out.println(view.toString());
+        return bvfSvc.updateBVF(view);
+    }
+
+    // Board 수정 fetch
+    @ResponseBody
+    @RequestMapping("/board/vo_fetch_bin21/delete/fetch")
+    public String BVFDeleteFetch(@RequestBody String tp_pk) {
+        System.out.println(tp_pk);
+        return bvfSvc.deleteBVF(tp_pk);
+    }
+
 }

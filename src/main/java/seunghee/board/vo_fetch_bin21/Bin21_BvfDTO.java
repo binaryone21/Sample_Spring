@@ -9,4 +9,8 @@ public class Bin21_BvfDTO {
     private String tp_age;
     private String tp_name;
     private String tp_job;
+    private String tp_reg_dt;
+    private String tp_reg_id;
+    private String tp_mod_dt;
+    private String tp_mod_id;
 }

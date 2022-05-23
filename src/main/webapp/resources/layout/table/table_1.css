@@ -1,11 +1,11 @@
-.table1_com_tb table{
+.table1_com_tl table{
     width:100%;
     border-collapse: separate;
     border-spacing: 0;
     table-layout: fixed;
     font-size:13px;
 }
-.table1_com_tb_header {
+.table1_com_tl_header {
     border-top:solid 1px #d9d9d9;
     width: 100%;
     display: flex;
@@ -14,35 +14,69 @@
     line-height: 30px;
     padding-right: 15px;
 }
-.table1_com_tb_header div {
+.table1_com_tl_header div {
     padding:0 20px;
 }
-.table1_com_tb_body {
+.table1_com_tl_body {
     height:calc(100% - 50px);
     overflow-y: auto;
     background-color:#fff;
     border-bottom: 1px solid #e5e5e5;
 }
-.table1_com_tb_body td {
+.table1_com_tl_body td {
     padding: 5px 20px;
     font-weight:normal;
     border-bottom:1px solid #e5e5e5;
+    overflow : hidden;
+    white-space : nowrap;
+    text-overflow : ellipsis;
+    height: 30px;
+    text-align: left;
 }
-.table1_com_tb_body tr:hover td {
+.table1_com_tl_body tr:hover td {
     background-color:#f2f2f2;
     cursor:pointer;
     font-weight:bold;
 }
-.table1_com_tb_body::-webkit-scrollbar {
+.table1_com_tl_body::-webkit-scrollbar {
     width: 15px;
 }
-.table1_com_tb_body::-webkit-scrollbar-thumb {
+.table1_com_tl_body::-webkit-scrollbar-thumb {
     background-color: #949494;
     border-radius: 5px;
     background-clip: padding-box;
     border: 2px solid transparent;
 }
-.table1_com_tb_body::-webkit-scrollbar-track {
+.table1_com_tl_body::-webkit-scrollbar-track {
     background-color: #fff;
     border-radius: 5px;
+}
+
+.table1_com_tv table {
+    width: 100%;
+    table-layout: fixed;
+}
+.table1_com_tv th {
+    background: #f2f2f2;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    border: 1px solid #d9d9d9;
+}
+.table1_com_tv td {
+    background: white;
+    border: 1px solid #d9d9d9;
+    padding: 5px 10px;
+    overflow : hidden;
+    white-space : nowrap;
+    text-overflow : ellipsis;
+    outline: none;
+}
+.table1_com_tv input {
+    width: 100%;
+    padding-left: 10px;
+}
+.table1_com_tv_readonly {
+    background: #eee;
+    border: 1px solid black;
 }
