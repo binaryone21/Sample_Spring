@@ -35,22 +35,22 @@
                     <option value="NAME">이름</option>
                     <option value="AGE">나이</option>
                 </select>
-                <input type="text" name="searchText" style="width:250px">
+                <input type="text" id="searchText" name="searchText" style="width:250px">
             </div>
             <button type="button" id="searchBtn">검색</button>
             <input  type="hidden" id="pagePer"   name="pagePer"   value="${search.pagePer}">
             <input  type="hidden" id="pageNavi"  name="pageNavi"  value="${search.pageNavi}">
             <input  type="hidden" id="pageNo"    name="pageNo"    value="${search.pageNo}">
         </form>
-    </article>
+    </article> <%-- Search 1 --%>
 
     <%-- Table 1 --%>
-    <article class="table1_com_tb" style="height:300px;">
+    <article class="table1_com_tl" style="height:300px;">
         <div>
             <span>총 게시물 </span>
             <span id="totalNo"></span>
         </div>
-        <div class="table1_com_tb_header">
+        <div class="table1_com_tl_header">
             <div style="width:70px">No</div>
             <div style="width:130px">이름</div>
             <div style="width:130px">나이</div>
@@ -58,25 +58,72 @@
             <div style="width:calc(100% - 460px)">내용</div>
         </div>
 
-        <div class="table1_com_tb_body">
-            <table id="boardTable">
+        <div class="table1_com_tl_body">
+            <table id="boardList">
                 <tr>
                     <td style="width:70px"  name="tp_pk"></td>
-                    <td style="width:130px" name="tp_age"></td>
                     <td style="width:130px" name="tp_name"></td>
+                    <td style="width:130px" name="tp_age"></td>
                     <td style="width:130px" name="tp_job"></td>
                     <td style="width:calc(100% - 460px)"></td>
                 </tr>
             </table>
         </div>
-    </article>
+    </article> <%-- Table 1 --%>
 
+    <%-- Paging 1 --%>
     <article class="paging1_com_pg">
         <div id="pageForward"> < </div>
         <c:forEach var="num" begin="1" end="5" step="1">
             <div class="pageNumbers"></div>
         </c:forEach>
         <div id="pageBackward"> > </div>
-    </article>
+    </article> <%-- Paging 1 --%>
+
+    <%-- View 1 --%>
+    <article class="table1_com_tv">
+        <form id="viewForm">
+            <table id="boardView">
+                <colgroup>
+                    <col style="width:100px">
+                    <col style="width:calc(25% - 100px)">
+                    <col style="width:100px">
+                    <col style="width:calc(25% - 100px)">
+                    <col style="width:100px">
+                    <col style="width:calc(25% - 100px)">
+                    <col style="width:100px">
+                    <col style="width:calc(25% - 100px)">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th>No</th>
+                    <td><input type="text" name="tp_pk" class="table1_com_tv_readonly" readonly></td>
+                    <th>이름</th>
+                    <td><input type="text" name="tp_name" class="table1_com_tv_readonly" readonly></td>
+                    <th>나이</th>
+                    <td><input type="text" name="tp_age" placeholder="-"></td>
+                    <th>직업</th>
+                    <td><input type="text" name="tp_job" placeholder="-"></td>
+                </tr>
+                <tr>
+                    <th>등록일시</th>
+                    <td><input type="text" name="tp_reg_dt" class="table1_com_tv_readonly" readonly></td>
+                    <th>등록자</th>
+                    <td><input type="text" name="tp_reg_id" class="table1_com_tv_readonly" readonly></td>
+                    <th>수정일시</th>
+                    <td><input type="text" name="tp_mod_dt" class="table1_com_tv_readonly" readonly></td>
+                    <th>수정자</th>
+                    <td><input type="text" name="tp_mod_id" class="table1_com_tv_readonly" readonly></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="hidden" id="check" value="O">
+        </form>
+        <div class="table1_com_btns">
+            <button type="button" class="com_btn_insert" id="newBoardBtn">신규</button>
+            <button type="button" class="com_btn_update" id="savBoardBtn">저장</button>
+            <button type="button" class="com_btn_delete" id="delBoardBtn">삭제</button>
+        </div>
+    </article> <%-- View 1 --%>
 </body>
 </html>

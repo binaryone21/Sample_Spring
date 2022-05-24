@@ -25,7 +25,7 @@
     searchText.addEventListener('keyup', searchEnter)
 
     // 검색 버튼 클릭시
-    searchBtn.addEventListener('click', () => searchBoardList(1))
+    searchBtn.addEventListener('click', () => searchList(1))
 
     // 신규 버튼 클릭시
     newBoardBtn.addEventListener('click', clearView)
@@ -44,26 +44,21 @@
     function startBoard() {
         document.getElementById('pagePer').value = pagePer
         document.getElementById('pageNavi').value = pageNavi
-        searchBoardList(1)
+        searchList(1)
         searchText.focus()
     }
 
     // 검색내용 엔터누를시 조회
     function searchEnter() {
-        if(window.event.keyCode == 13) searchBoardList(1)
+        if(window.event.keyCode == 13) searchList(1)
     }
 
-
-    /** 여기까지 */
-
-    // 검색조건을 통한 Board 조회
-    function searchBoardList(pageNo) {
+    // 검색조건을 통한 List 조회
+    function searchList(pageNo) {
         document.getElementById('pageNo').value = pageNo
-
-        let json = form2json('searchForm')
         fetch("/board/vo_fetch/list/fetch", {
             method: "POST",
-            body: json,
+            body: form2json('searchForm'),
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json, text/html",
@@ -76,14 +71,14 @@
             .catch((err) => console.log("Petch Error >> ", err))
     }
 
-    // 검색조건을 통한 Board 입력
+    // 검색조건을 통한 List 작성
     function writeBoard(map) {
-        writeBoardList(map.list)
-        writeBoardNavi(map.search)
+        writeList(map.list)
+        writeNavi(map.search)
     }
 
     // 검색 조건을 통한 Table 입력
-    function writeBoardList(list) {
+    function writeList(list) {
         let table = document.getElementById('boardList')
         while (table.rows[1]) {
             table.deleteRow(0)
@@ -94,7 +89,7 @@
             let view = list[i]
             table.insertRow(i)
             table.rows[i].innerHTML = tr.innerHTML
-            table.rows[i].addEventListener('click', () => searchBoardView(view['tp_pk']))
+            table.rows[i].addEventListener('click', () => searchView(view['tp_pk']))
             for (let idx in view) {
                 let td = table.rows[i].querySelector('*[name="' + idx + '"]')
                 if (td != undefined) {
@@ -106,13 +101,144 @@
     }
 
     // 검색 조건을 통한 view 조회
-    function searchBoardView(tp_pk) {
-        alert(tp_pk+' view 조회')
+    function writeNavi(tp_pk) {
+        // alert(tp_pk+' view 조회')
+    }
+
+    // 검색조건을 통한 View 조회
+    function searchView(tp_pk) {
+        document.getElementById('pageNo').value = tp_pk
+        fetch("/board/vo_fetch_bin21/view/fetch", {
+            method: "POST",
+            body: tp_pk,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text/html",
+                credentials: "same-origin",
+                mode: "cors"
+            }
+        })
+            .then((res) => res.json())
+            .then((view) => writeView(view))
+            .catch((err) => console.log("Petch Error >> ", err))
+    }
+
+    // 검색조건을 통한 View 작성
+    function writeView(view) {
+        for (let idx in view) {
+            let target = document.querySelector('table#boardView *[name="' + idx + '"]')
+            if (target != undefined)
+                target.value = view[idx]
+        }
+
+        let tp_name = document.querySelector('table#boardView *[name="tp_name"]')
+        tp_name.setAttribute('readonly', 'readonly')
+        tp_name.setAttribute('class', 'table1_com_tv_readonly')
+
+        document.getElementById('check').value = "O"
+    }
+
+    // View 신규
+    function clearView() {
+        let targets = document.querySelectorAll('table#boardView *[name]')
+        for (target of targets) {
+            target.value = ''
+        }
+
+        let tp_name = document.querySelector('table#boardView *[name="tp_name"]')
+        tp_name.removeAttribute('readonly')
+        tp_name.removeAttribute('class')
+
+        document.getElementById('check').value = "N"
+    }
+
+    // View 저장
+    function saveView() {
+        let check = document.getElementById('check').value
+        if(check == 'N') {
+            fetch("/board/vo_fetch_bin21/insert/fetch", {
+                method: "POST",
+                body: form2json("viewForm"),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json, text/html",
+                    credentials: "same-origin",
+                    mode: "cors"
+                }
+            })
+                .then((res) => res.json())
+                .then((result) => checkBoard(result))
+                .catch((err) => console.log("Petch Error >> ", err))
+        } else {
+            fetch("/board/vo_fetch_bin21/update/fetch", {
+                method: "POST",
+                body: form2json("viewForm"),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json, text/html",
+                    credentials: "same-origin",
+                    mode: "cors"
+                }
+            })
+                .then((res) => res.json())
+                .then((result) => checkBoard(result))
+                .catch((err) => console.log("Petch Error >> ", err))
+         }
+    }
+
+    // View 삭제
+    function deleteView() {
+        let check = document.getElementById('check').value
+        let tp_pk = document.querySelector('form#viewForm *[name="tp_pk"]').value
+        if(check == 'O') {
+            fetch("/board/vo_fetch_bin21/delete/fetch", {
+                method: "POST",
+                body: tp_pk,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json, text/html",
+                    credentials: "same-origin",
+                    mode: "cors"
+                }
+            })
+                .then((res) => res.json())
+                .then((result) => checkBoard(result))
+                .catch((err) => console.log("Petch Error >> ", err))
+        }
+
+        let targets = document.querySelectorAll('table#boardView *[name]')
+        for (target of targets) {
+            target.value = ''
+        }
+
+        let tp_name = document.querySelector('table#boardView *[name="tp_name"]')
+        tp_name.removeAttribute('readonly')
+        tp_name.removeAttribute('class')
+    }
+
+    // 성공 여부
+    function checkBoard(check) {
+        let tp_name = document.querySelector('table#boardView *[name="tp_name"]')
+        tp_name.setAttribute('readonly', 'readonly')
+        tp_name.setAttribute('class', 'table1_com_tv_readonly')
+        setTimeout(searchList(1), 1000)
     }
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+    /** */
 
     // 네비게이션 설정
     function writeBoardNavi(search) {

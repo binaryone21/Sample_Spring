@@ -14,8 +14,7 @@ public class Bin21_BvfService {
 
     // 게시판 검색조건 설정
     public Bin21_BvfSearchVO searchBVF(Bin21_BvfSearchVO searchVO) {
-        searchVO.compute(bvfDao.selectBVF_PK_Count(searchVO));
-        return searchVO;
+        return new Bin21_BvfSearchVO(bvfDao.selectBVF_PK_Count(searchVO));
     }
 
     // 게시판 목록

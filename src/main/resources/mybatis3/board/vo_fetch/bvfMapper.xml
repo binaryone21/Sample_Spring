@@ -2,34 +2,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bvfMap">
 
-        <!-- 게시판 목록조회 -->
-        <select id="arraysBVF" statementType="PREPARED"
-                parameterType="seunghee.board.vo_fetch.BvfSearchVO"
-                resultType="seunghee.board.vo_fetch.BvfDTO">
-            select * from T_PERSON
-                where 1 = 1
-                    <if test="searchType == 'NAME' and searchText != '' and searchText != null">
-                        and TP_NAME like concat('%', #{searchText}, '%')
-                    </if>
-                    <if test="searchType == 'AGE' and searchText != '' and searchText != null">
-                        and TP_AGE like concat('%', #{searchText}, '%')
-                    </if>
-                    order by TP_PK desc
-                        limit ${startNo}, ${pagePer}
-        </select>
+    <!-- 게시판 목록조회 개수 -->
+    <select id="selectBVF_PK_Count" statementType="PREPARED"
+            parameterType="seunghee.board.vo_fetch.BvfSearchVO"
+            resultType="int">
+        select count(TP_PK) from T_PERSON
+            where TP_DEL_YN = 'N'
+                <if test="searchType == 'NAME' and searchText != '' and searchText != null">
+                    and TP_NAME like concat('%', #{searchText}, '%')
+                </if>
+                <if test="searchType == 'AGE' and searchText != '' and searchText != null">
+                    and TP_AGE like concat('%', #{searchText}, '%')
+                </if>
+    </select>
 
-        <!-- 게시판 목록조회 개수 -->
-        <select id="selectBVF_PK_Count" statementType="PREPARED"
-                parameterType="seunghee.board.vo_fetch.BvfSearchVO"
-                resultType="int">
-            select count(TP_PK) from T_PERSON
-                where 1 = 1
-                    <if test="searchType == 'NAME' and searchText != '' and searchText != null">
-                        and TP_NAME like concat('%', #{searchText}, '%')
-                    </if>
-                    <if test="searchType == 'AGE' and searchText != '' and searchText != null">
-                        and TP_AGE like concat('%', #{searchText}, '%')
-                    </if>
-        </select>
+    <!-- 게시판 목록조회 -->
+    <select id="arraysBVF" statementType="PREPARED"
+            parameterType="seunghee.board.vo_fetch.BvfSearchVO"
+            resultType="seunghee.board.vo_fetch.BvfDTO">
+        select
+            TP_PK,
+            TP_NAME,
+            TP_AGE,
+            TP_JOB
+                from T_PERSON
+                    where 1 = 1
+                        <if test="searchType == 'NAME' and searchText != '' and searchText != null">
+                            and TP_NAME like concat('%', #{searchText}, '%')
+                        </if>
+                        <if test="searchType == 'AGE' and searchText != '' and searchText != null">
+                            and TP_AGE like concat('%', #{searchText}, '%')
+                        </if>
+                        order by TP_PK desc
+                            limit ${startNo}, ${pagePer}
+    </select>
 
+    <!-- 게시판 상세 -->
+    <select id="selectBVF" statementType="PREPARED"
+            parameterType="String"
+            resultType="seunghee.board.vo_fetch_bin21.Bin21_BvfDTO">
+        select
+            TP_PK,
+            TP_NAME,
+            TP_AGE,
+            TP_JOB,
+            date_format(TP_REG_DT, '%Y. %m. %d %T') as 'TP_REG_DT',
+            TP_REG_ID,
+            date_format(TP_MOD_DT, '%Y. %m. %d %T') as 'TP_MOD_DT',
+            TP_MOD_ID
+                from T_PERSON
+                    where TP_PK = ${value}
+    </select>
+
+    <!-- 게시판 등록 -->
+    <insert id="insertBVF" statementType="PREPARED"
+            parameterType="seunghee.board.vo_fetch_bin21.Bin21_BvfDTO">
+        insert into T_PERSON (
+            TP_NAME,
+            TP_AGE,
+            TP_JOB,
+            TP_REG_DT,
+            TP_REG_ID,
+            TP_MOD_DT,
+            TP_MOD_ID
+        ) values (
+             #{tp_name},
+             #{tp_age},
+             #{tp_job},
+             date_format(now(), '%Y%m%d%H%i%s'),
+             '현재 로그인 사용자',
+             date_format(now(), '%Y%m%d%H%i%s'),
+             '현재 로그인 사용자'
+         )
+    </insert>
+
+    <!-- 게시판 수정 -->
+    <update id="updateBVF" statementType="PREPARED"
+            parameterType="seunghee.board.vo_fetch_bin21.Bin21_BvfDTO">
+        update T_PERSON set
+            TP_NAME = #{tp_name},
+            TP_AGE = #{tp_age},
+            TP_JOB = #{tp_job},
+            TP_MOD_DT = date_format(now(), '%Y%m%d%H%i%s'),
+            TP_MOD_ID = '현재 로그인 사용자'
+                where TP_PK = #{tp_pk}
+    </update>
+
+    <!-- 게시판 삭제 -->
+    <update id="deleteBVF" statementType="PREPARED"
+            parameterType="seunghee.board.vo_fetch_bin21.Bin21_BvfDTO">
+        update T_PERSON set
+            TP_DEL_YN = 'Y'
+                where TP_PK = #{value}
+    </update>
 </mapper>

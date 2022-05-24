@@ -16,9 +16,9 @@ public class Bin21_BvfController {
     @Autowired
     private Bin21_BvfService bvfSvc;
 
-    // Board 화면조회
+    // Board 화면
     @RequestMapping("/board/vo_fetch_bin21/list")
-    public String BVFList(Bin21_BvfSearchVO searchVO, Model model) {
+    public String pageBVF(Bin21_BvfSearchVO searchVO, Model model) {
         model.addAttribute("search", searchVO);
         return "board/vo_fetch_bin21/bin21_bvfList";
     }
@@ -26,10 +26,9 @@ public class Bin21_BvfController {
     // Board 목록 fetch
     @ResponseBody
     @RequestMapping("/board/vo_fetch_bin21/list/fetch")
-    public Map<String, Object> BVFListFetch(@RequestBody Bin21_BvfSearchVO searchVO) {
+    public Map<String, Object> arraysBVF(@RequestBody Bin21_BvfSearchVO searchVO) {
         Map<String, Object> map = new HashMap<>();
-        searchVO = bvfSvc.searchBVF(searchVO);
-        map.put("search", searchVO);
+        map.put("search", bvfSvc.searchBVF(searchVO));
         map.put("list", bvfSvc.arraysBVF(searchVO));
         return map;
     }
@@ -37,31 +36,28 @@ public class Bin21_BvfController {
     // Board 상세 fetch
     @ResponseBody
     @RequestMapping("/board/vo_fetch_bin21/view/fetch")
-    public Bin21_BvfDTO BVFViewFetch(@RequestBody String tp_pk) {
+    public Bin21_BvfDTO selectBVF(@RequestBody String tp_pk) {
         return bvfSvc.selectBVF(tp_pk);
     }
 
     // Board 등록 fetch
     @ResponseBody
     @RequestMapping("/board/vo_fetch_bin21/insert/fetch")
-    public String BVFInsertFetch(@RequestBody Bin21_BvfDTO view) {
-        System.out.println(view.toString());
+    public String insertBVF(@RequestBody Bin21_BvfDTO view) {
         return bvfSvc.insertBVF(view);
     }
 
     // Board 수정 fetch
     @ResponseBody
     @RequestMapping("/board/vo_fetch_bin21/update/fetch")
-    public String BVFUpdateFetch(@RequestBody Bin21_BvfDTO view) {
-        System.out.println(view.toString());
+    public String updateBVF(@RequestBody Bin21_BvfDTO view) {
         return bvfSvc.updateBVF(view);
     }
 
-    // Board 수정 fetch
+    // Board 삭제 fetch
     @ResponseBody
     @RequestMapping("/board/vo_fetch_bin21/delete/fetch")
-    public String BVFDeleteFetch(@RequestBody String tp_pk) {
-        System.out.println(tp_pk);
+    public String deleteBVF(@RequestBody String tp_pk) {
         return bvfSvc.deleteBVF(tp_pk);
     }
 

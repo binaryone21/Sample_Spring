@@ -17,19 +17,48 @@ public class BvfController {
     @Autowired
     private BvfService bvfSvc;
 
+    // Board 화면
     @RequestMapping("/board/vo_fetch/list")
-    public String BVFList(BvfSearchVO searchVO, Model model) {
+    public String pageBVF(BvfSearchVO searchVO, Model model) {
         model.addAttribute("search", searchVO);
         return "board/vo_fetch/bvfList";
     }
 
+    // Board 목록 fetch
     @ResponseBody
     @RequestMapping("/board/vo_fetch/list/fetch")
-    public Map<String, Object> BVFListFetch(@RequestBody BvfSearchVO searchVO) {
+    public Map<String, Object> arraysBVF(@RequestBody BvfSearchVO searchVO) {
         Map<String, Object> map = new HashMap<>();
-        searchVO = bvfSvc.searchBVF(searchVO);
-        map.put("search", searchVO);
+        map.put("search", bvfSvc.searchBVF(searchVO));
         map.put("list", bvfSvc.arraysBVF(searchVO));
         return map;
+    }
+
+    // Board 상세 fetch
+    @ResponseBody
+    @RequestMapping("/board/vo_fetch/view/fetch")
+    public BvfDTO selectBVF(@RequestBody String tp_pk) {
+        return bvfSvc.selectBVF(tp_pk);
+    }
+
+    // Board 등록 fetch
+    @ResponseBody
+    @RequestMapping("/board/vo_fetch/insert/fetch")
+    public String insertBVF(@RequestBody BvfDTO view) {
+        return bvfSvc.insertBVF(view);
+    }
+
+    // Board 수정 fetch
+    @ResponseBody
+    @RequestMapping("/board/vo_fetch/update/fetch")
+    public String updateBVF(@RequestBody BvfDTO view) {
+        return bvfSvc.updateBVF(view);
+    }
+
+    // Board 삭제 fetch
+    @ResponseBody
+    @RequestMapping("/board/vo_fetch/delete/fetch")
+    public String deleteBVF(@RequestBody String tp_pk) {
+        return bvfSvc.deleteBVF(tp_pk);
     }
 }

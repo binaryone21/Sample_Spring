@@ -60,7 +60,7 @@
 
     // 검색조건을 통한 List 작성
     function writeList(map) {
-        bin21.writeList('boardList', map.list, searchBoardView, 'tp_pk')
+        bin21.writeList('boardList', map.list, searchView, 'tp_pk')
 
         document.getElementById('totalNo').innerText = map.search.totalNo
         // PageNavi 영역
@@ -69,7 +69,7 @@
     }
 
     // 검색조건을 통한 View 조회
-    function searchBoardView(tp_pk) {
+    function searchView(tp_pk) {
         bin21.fetch("/board/vo_fetch_bin21/view/fetch", tp_pk, writeView)
     }
 
@@ -89,7 +89,6 @@
 
     // View 저장
     function saveView() {
-        console.log(form2json("viewForm"))
         let check = document.getElementById('check').value
         switch(check) {
             case 'N' : bin21.fetch("/board/vo_fetch_bin21/insert/fetch", form2json("viewForm"), checkBoard); break;

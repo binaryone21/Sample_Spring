@@ -22,7 +22,7 @@ public class BvfSearchVO {
     private int pageEnd;						// 하단 네비게이션 끝 페이지 번호
 
     // 기본 값 설정
-    BvfSearchVO() {
+    public BvfSearchVO() {
         if(startDate == null)   { startDate = "2022-04-01"; }
         if(startTime == null)   { startTime = "00:00"; }
         if(endDate == null)     { endDate = "2022-12-30"; }
@@ -30,6 +30,11 @@ public class BvfSearchVO {
         if(pagePer == 0)        { pagePer = 20; }
         if(pageNavi == 0)       { pageNavi = 5; }
         if(pageNo == 0 )        { pageNo = 1; }
+    }
+
+    public BvfSearchVO(int pageNo) {
+        this();
+        this.compute(pageNo);
     }
 
     // 페이지 네비게이션 설정

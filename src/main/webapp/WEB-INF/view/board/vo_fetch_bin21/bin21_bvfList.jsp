@@ -62,8 +62,8 @@
             <table id="boardList">
                 <tr>
                     <td style="width:70px"  name="tp_pk"></td>
-                    <td style="width:130px" name="tp_age"></td>
                     <td style="width:130px" name="tp_name"></td>
+                    <td style="width:130px" name="tp_age"></td>
                     <td style="width:130px" name="tp_job"></td>
                     <td style="width:calc(100% - 460px)"></td>
                 </tr>
@@ -101,9 +101,9 @@
                         <th>이름</th>
                         <td><input type="text" name="tp_name" class="table1_com_tv_readonly" readonly></td>
                         <th>나이</th>
-                        <td><input type="text" name="tp_age"></td>
+                        <td><input type="text" name="tp_age" placeholder="-"></td>
                         <th>직업</th>
-                        <td><input type="text" name="tp_job"></td>
+                        <td><input type="text" name="tp_job" placeholder="-"></td>
                     </tr>
                     <tr>
                         <th>등록일시</th>
