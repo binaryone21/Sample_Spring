@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+// date 를 입력받는 메소드에 대해서 현재시간 메소드도 추가
+// DateTool 참고
+
 public class CalendarTool {
 
     /** 날짜포맷(일시) */

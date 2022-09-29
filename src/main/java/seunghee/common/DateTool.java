@@ -1,8 +1,8 @@
 package seunghee.common;
+
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,23 +16,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class DateTool {
 
-    /** 날짜포맷(년) */
-    public static final String FMT_YEAR          = "yyyy";
-
-    /** 날짜포맷(월) */
-    public static final String FMT_MONTH      = "MM";
-
-    /** 날짜포맷(일) */
-    public static final String FMT_DAY       = "dd";
-
     /** 날짜포맷(시) */
     public static final String FMT_HOUR          = "HH";
-
-    /** 날짜포맷(분) */
-    public static final String FMT_MINUTE     = "mm";
-
-    /** 날짜포맷(초) */
-    public static final String FMT_SECOND     = "ss";
 
     /** 날짜포맷(일시) */
     public static final String FMT_DATE_TIME    = "yyyy-MM-dd HH:mm:ss";
@@ -45,21 +30,6 @@ public class DateTool {
 
     /** 날짜포맷(일자 8자리) */
     public static final String FMT_DATE_NUM         = "yyyyMMdd";
-
-    /** 날짜포맷(시간) */
-    public static final String FMT_TIME         = "HH:mm:ss";
-
-    /** 날짜포맷(시간 6자리) */
-    public static final String FMT_TIME_NUM         = "HH:mm:ss";
-
-    /** 날짜포맷(년-월) */
-    public static final String FMT_YAER_MONTH         = "yyyy-MM";
-
-    /** 날짜포맷(년월 6자리) */
-    public static final String FMT_YEAR_MONTH_NUM         = "yyyyMM";
-
-    /** 날짜포맷(시:분) */
-    public static final String FMT_HOUR_MINUTE       = "HH:mm";
 
 
     /**
