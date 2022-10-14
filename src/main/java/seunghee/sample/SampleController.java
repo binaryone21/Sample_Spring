@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SampleController {
 
+    @GetMapping("/sample/sample")
+    public String sampleSample() {
+        return "sample/sample";
+    }
+
     @GetMapping("/sample/sample1")
     public String sampleSample1() {
         return "sample/sample1";
@@ -16,4 +21,6 @@ public class SampleController {
     public String sampleSample2() {
         return "sample/sample2";
     }
+
+
 }
