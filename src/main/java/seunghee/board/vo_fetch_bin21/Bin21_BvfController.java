@@ -18,7 +18,7 @@ public class Bin21_BvfController {
 
     // Board 화면
     @RequestMapping("/board/vo_fetch_bin21/list")
-    public String pageBVF(Bin21_BvfSearchVO searchVO, Model model) {
+    public String pageBVF(Model model, Bin21_BvfSearchVO searchVO) {
         model.addAttribute("search", searchVO);
         return "board/vo_fetch_bin21/bin21_bvfList";
     }
