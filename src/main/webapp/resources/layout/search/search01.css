@@ -1,0 +1,69 @@
+.com_search_01 form {
+    height: 30px;
+    margin: 10px 0 20px 0;
+    display: flex;
+    font-size: 13px;
+}
+.com_search_01 > form > div > *:first-child {
+    font-weight: bold;
+    line-height: 28px;
+    text-align: center;
+    min-width: 77px;
+}
+.com_search_01 > form > div > *:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.com_search_01 .date {
+    background: #E9ECEF;
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+.com_search_01 input {
+    border: none;
+    border-left: 1px solid #ced4da;
+    line-height: 28px;
+    padding-left: 10px;
+    color: #32363a;
+}
+.com_search_01 .date input[type="date"] {
+    width: 130px;
+}
+.com_search_01 .date input[type="time"] {
+    width: 100px;
+}
+.com_search_01 .date input[type="date"]::-webkit-calendar-picker-indicator,
+.com_search_01 .date input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+.com_search_01 .type {
+    background: #E9ECEF;
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+.com_search_01 .type select {
+    width: 100px;
+    padding-left: 5px;
+    border: none;
+    border-left: 1px solid #ced4da;
+    height: 28px;
+}
+.com_search_01 .date input[type="text"] {
+    min-width: 200px;
+}
+.com_search_01 button {
+    min-width: 65px;
+    height: 30px;
+    color: white;
+    background: #0A6ED1;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    line-height: 30px;
+}
