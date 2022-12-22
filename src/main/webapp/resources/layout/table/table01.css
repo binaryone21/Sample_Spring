@@ -1,11 +1,12 @@
-.table1_com_tl table{
+/** Table List */
+.com_table_list_01 table{
     width:100%;
     border-collapse: separate;
     border-spacing: 0;
     table-layout: fixed;
     font-size:13px;
 }
-.table1_com_tl_header {
+.com_table_list_01 .header {
     border-top:solid 1px #d9d9d9;
     width: 100%;
     display: flex;
@@ -14,16 +15,23 @@
     line-height: 30px;
     padding-right: 15px;
 }
-.table1_com_tl_header div {
+.com_table_list_01 .header div {
     padding:0 20px;
 }
-.table1_com_tl_body {
+.com_table_list_01 .body {
     height:calc(100% - 50px);
     overflow-y: auto;
     background-color:#fff;
     border-bottom: 1px solid #e5e5e5;
 }
-.table1_com_tl_body td {
+.com_table_list_01 table{
+     width:100%;
+     border-collapse: separate;
+     border-spacing: 0;
+     table-layout: fixed;
+     font-size:13px;
+ }
+.com_table_list_01 table td {
     padding: 5px 20px;
     font-weight:normal;
     border-bottom:1px solid #e5e5e5;
@@ -33,24 +41,70 @@
     height: 30px;
     text-align: left;
 }
-.table1_com_tl_body tr:hover td {
+.com_table_list_01 table tr:hover td {
     background-color:#f2f2f2;
     cursor:pointer;
     font-weight:bold;
 }
-.table1_com_tl_body::-webkit-scrollbar {
+.com_table_list_01 .body::-webkit-scrollbar {
     width: 15px;
 }
-.table1_com_tl_body::-webkit-scrollbar-thumb {
+.com_table_list_01 .body::-webkit-scrollbar-thumb {
     background-color: #949494;
     border-radius: 5px;
     background-clip: padding-box;
     border: 2px solid transparent;
 }
-.table1_com_tl_body::-webkit-scrollbar-track {
+.com_table_list_01 .body::-webkit-scrollbar-track {
     background-color: #fff;
     border-radius: 5px;
 }
+.com_table_list_01 .page {
+    margin: 18px auto 20px auto;
+    display: flex;
+    justify-content: center;
+    /*width: 306px;*/
+    height: 32px;
+}
+.com_table_list_01 .page div {
+    float: left;
+    width: 32px;
+    height: 32px;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size: 13px;
+    text-align: center;
+    background: #fff;
+    border:1px solid #e5e5e5;
+    border-spacing: 0;
+    margin:1px;
+    border-radius: 5px;
+    color:#32363a;
+}
+.com_table_list_01 .page div:hover {
+    background: #f5faff;
+    cursor:pointer;
+}
+.com_table_list_01 .page .on {
+    background: black !important;
+    color: white !important;
+}
+.com_table_list_01 .page .on:hover {
+    background: black !important;
+}
+.com_table_list_01 .page .off {
+    background: #eee !important;
+}
+.com_table_list_01 .page .off:hover {
+    background: #eee !important;
+    cursor:default !important;
+}
+
+
+
+
+
+
 
 .table1_com_tv table {
     width: 100%;

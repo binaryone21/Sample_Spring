@@ -6,8 +6,12 @@
         <select id="arraysBVD" statementType="PREPARED"
                 parameterType="seunghee.board.vo_default.BvdSearchVO"
                 resultType="seunghee.board.vo_default.BvdDTO">
-            select * from T_PERSON
-                where 1 = 1
+            select TP_PK,
+                TP_NAME,
+            TP_AGE,
+            TP_JOB
+                from T_PERSON
+                where TP_DEL_YN = 'N'
                     <if test="searchType == 'NAME' and searchText != '' and searchText != null">
                         and TP_NAME like concat('%', #{searchText}, '%')
                     </if>
@@ -23,7 +27,7 @@
                 parameterType="seunghee.board.vo_default.BvdSearchVO"
                 resultType="int">
             select count(TP_PK) from T_PERSON
-                where 1 = 1
+                where TP_DEL_YN = 'N'
                     <if test="searchType == 'NAME' and searchText != '' and searchText != null">
                         and TP_NAME like concat('%', #{searchText}, '%')
                     </if>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AMBoardMapper">
+
+    <!-- 게시판 목록조회 개수 -->
+    <select id="selectBoardCount" statementType="PREPARED" parameterType="map" resultType="int">
+        select count(PERSON_SEQ)
+          from T_PERSON
+         where USE_YN = 'Y'
+        <if test="@org.apache.commons.lang.StringUtils@isNotBlank(searchType)">
+            <if test="searchType == 'NAME' and @org.apache.commons.lang.StringUtils@isNotBlank(searchText)">
+                and NAME like concat('%', #{searchText}, '%')
+            </if>
+            <if test="searchType == 'AGE' and @org.apache.commons.lang.StringUtils@isNotBlank(searchText)">
+                and AGE like concat('%', #{searchText}, '%')
+            </if>
+        </if>
+    </select>
+
+
+    <!-- 게시판 목록조회 -->
+    <select id="arraysBoard" statementType="PREPARED" parameterType="map" resultType="map">
+        select PERSON_SEQ   "personSeq"
+             , NAME         "name"
+             , AGE          "age"
+             , JOB          "job"
+          from T_PERSON
+         where USE_YN = 'Y'
+        <if test="@org.apache.commons.lang.StringUtils@isNotBlank(searchType)">
+            <if test="searchType == 'NAME' and @org.apache.commons.lang.StringUtils@isNotBlank(searchText)">
+                and NAME like concat('%', #{searchText}, '%')
+            </if>
+            <if test="searchType == 'AGE' and @org.apache.commons.lang.StringUtils@isNotBlank(searchText)">
+                and AGE like concat('%', #{searchText}, '%')
+            </if>
+        </if>
+         order by PERSON_SEQ desc
+         limit ${startNo}, ${pagePer}
+    </select>
+</mapper>

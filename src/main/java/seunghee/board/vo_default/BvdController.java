@@ -16,6 +16,6 @@ public class BvdController {
         searchVO = bvdSvc.searchBVD(searchVO);
         model.addAttribute("TP_List", bvdSvc.arraysBVD(searchVO));
         model.addAttribute("search", searchVO);
-        return "board/vo_default/bvdList";
+        return "/board/vo_default/bvdList";
     }
 }

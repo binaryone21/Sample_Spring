@@ -44,12 +44,12 @@
     </article>
 
     <%-- Table 1 --%>
-    <article class="table1_com_tl" style="height:300px;">
+    <article class="table1_com_tb" style="height:300px;">
         <div>
             <span>총 게시물 </span>
             <span>${search.totalNo}</span>
         </div>
-        <div class="table1_com_tl_header">
+        <div class="table1_com_tb_header">
             <div style="width:70px">No</div>
             <div style="width:130px">이름</div>
             <div style="width:130px">나이</div>
@@ -57,7 +57,7 @@
             <div style="width:calc(100% - 460px)">내용</div>
         </div>
 
-        <div class="table1_com_tl_body">
+        <div class="table1_com_tb_body">
             <table>
                 <colgroup>
                     <col style="width:70px">
