@@ -1,6 +1,25 @@
 window.Bin21Tool = {
     /**
      *
+     * @param form
+     * @returns {{}}
+     */
+    serializeObject : (form) => {
+        if(form == null) {
+            console.log('ERROR [Bin21Tool serializeObject] >> is not form or not found');
+            return;
+        }
+
+        let data = new FormData(form);
+        let json = {};
+        for(let [key, value] of data) {
+            json[key] = value
+        }
+
+        return json;
+    },
+    /**
+     *
      * @param params.table  - table
      * @param params.list   - boardList
      * @param params.fn     - callBack
@@ -28,4 +47,28 @@ window.Bin21Tool = {
             }
         }
     },
+    setView : (params) => {
+        for(let [key, value] of Object.entries(params.view)) {
+            let target = params.table.querySelector('*[name="'+ key +'"]');
+            if(target) {
+                target.value = value;
+            }
+        }
+    },
+    viewClear : (table) => {
+        let targets = table.querySelectorAll('*[name]');
+        for(target of targets) {
+            target.value = '';
+        }
+    },
+    editable : (params) => {
+        let target = params.table.querySelector('*[name="'+ params.name +'"]');
+        if(params.editYn) {
+            target.removeAttribute('readonly');
+            target.removeAttribute('class');
+        } else {
+            target.setAttribute('readonly', 'readonly');
+            target.setAttribute('class', 'readonly');
+        }
+    }
 }

@@ -1,0 +1,5 @@
+ajax - map 완료
+
+
+
+fetch - vo - board  중간에 멈춤, entity, dto 등등 뭘로해야하나

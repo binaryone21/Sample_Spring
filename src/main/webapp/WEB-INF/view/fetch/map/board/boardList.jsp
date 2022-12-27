@@ -9,20 +9,21 @@
     <link rel="stylesheet" href="/layout/common.css">
     <link rel="stylesheet" href="/layout/search/search01.css">
     <link rel="stylesheet" href="/layout/table/table01.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/common/js/ajaxTool.js"></script>
+    <script src="/common/js/fetchTool.js"></script>
     <script src="/common/js/bin21Tool.js"></script>
     <script src="/layout/search/search01.js"></script>
     <script src="/layout/table/table01.js"></script>
 </head>
 
 <%--
+    async, await 어떻게 깔끔하게 처리할 수 있을까
+    분기가 나오는 순간부터 fetch 끝까지 존재해야 한다.
     <form onsubmit="return false">
 --%>
-
-<script>
+<script defer>
     (()=>{
-        let me = window.AMBoard = {
+        let me = window.FMBoard = {
             startUp : () => {
                 me.setVariables();
                 me.setEvents();
@@ -35,33 +36,33 @@
                 document.addEventListener('keyup', () => {
                     if(window.event.keyCode == 13) me.search();
                 });
-                $('#btnBoardSearch').click(me.search);
-                $('#btnBoardNew').click(me.viewNew);
-                $('#btnBoardSave').click(me.viewSave);
-                $('#btnBoardDelete').click(me.viewDelete);
+                document.getElementById('btnBoardSearch').addEventListener('click', me.search);
+                document.getElementById('btnBoardNew').addEventListener('click', me.viewNew);
+                document.getElementById('btnBoardSave').addEventListener('click', me.viewSave);
+                document.getElementById('btnBoardDelete').addEventListener('click', me.viewDelete);
             },
             initialize : () => {
                 PageTool.makePage({
-                    page    : $('#tableArticle01 .page')[0],
-                    pageMap : me.pageMap,
-                    fn      : (e) => me.getList(e.target.getAttribute('value'))
+                    page    : document.querySelector('#tableArticle01 .page'),
+                    fn      : (e) => me.getList(e.target.getAttribute('value')),
+                    pageMap : me.pageMap
                 })
                 SearchTool.setDateTime({
-                    search  : $('#searchArticle01')[0]
+                    search  : document.getElementById('searchArticle01')
                 })
                 me.search();
             },
-            search : () => {
-                me.getCount();
-                me.getList(1);
+            search : async () => {
+                await me.getCount();
+                await me.getList(1);
             },
-            getCount : () => {
-                AjaxTool.post({
-                    url     : "/ajax/map/board/selectBoardCount.ajax",
-                    data    : { 'searchMap' : Bin21Tool.serializeObject($('#searchArticle01 form')[0]) },
-                    type    : 'json',
+            getCount : async () => {
+                await FetchTool.post({
+                    url     : "/fetch/map/board/selectBoardCount.fetch",
+                    data    : { 'searchMap' : Bin21Tool.serializeObject(document.querySelector('#searchArticle01 form'))},
+                    dataType : 'json',
                     fn      : (result) => {
-                        $('#tableArticle01 .total')[0].innerText = result.total;
+                        document.querySelector('#tableArticle01 .total').innerText = result.total;
                         me.pageMap.total = result.total;
                     }
                 })
@@ -70,104 +71,104 @@
                 if(pageNo == '0') return;
                 PageTool.compute(me.pageMap, pageNo);
                 PageTool.setPage({
-                    page    : $('#tableArticle01 .page')[0],
+                    page    : document.querySelector('#tableArticle01 .page'),
                     pageMap : me.pageMap
                 });
-                AjaxTool.post({
-                    url     : "/ajax/map/board/arraysBoard.ajax",
-                    data    : {
-                        'searchMap' : Bin21Tool.serializeObject($('#searchArticle01 form')[0]),
+                FetchTool.post({
+                    url      : "/fetch/map/board/arraysBoard.fetch",
+                    data     : {
+                        'searchMap' : Bin21Tool.serializeObject(document.querySelector('#searchArticle01 form')),
                         'pageMap'   : me.pageMap
                     },
-                    type    : 'json',
-                    fn      : (result) => me.setList(result.boardList)
+                    dataType : 'json',
+                    fn       : (result) => me.setList(result.boardList)
                 })
             },
             setList : (boardList) => {
                 Bin21Tool.setList({
-                    table   : $('#tableArticle01 table')[0],
+                    table   : document.querySelector('#tableArticle01 table'),
                     list    : boardList,
                     key     : 'personSeq',
                     fn      : (result) => me.getView(result)
                 })
             },
             getView : (personSeq) => {
-                AjaxTool.post({
-                    url     : "/ajax/map/board/selectBoard.ajax",
-                    data    : {'boardMap' : {'personSeq' : personSeq}},
-                    type    : 'json',
-                    fn      : (result) => me.setView(result.boardView)
+                FetchTool.post({
+                    url         : "/fetch/map/board/selectBoard.fetch",
+                    data        : {'boardMap' : {'personSeq' : personSeq}},
+                    dataType    : 'json',
+                    fn          : (result) => me.setView(result.boardView)
                 })
             },
             setView : (result) => {
                 Bin21Tool.setView({
-                    table   : $('#tableArticle02 table')[0],
+                    table   : document.querySelector('#tableArticle02 table'),
                     view    : result
                 })
                 Bin21Tool.editable({
-                    table   : $('#tableArticle02 table')[0],
-                    name      : 'name',
+                    table   : document.querySelector('#tableArticle02 table'),
+                    name    : 'name',
                     editYn  : false,
                 })
-                $('#tableArticle02 #check')[0].value = 'O'
+                document.querySelector('#tableArticle02 #check').value = 'O'
             },
-            viewNew : () => {
-                Bin21Tool.viewClear($('#tableArticle02 table')[0]);
+            viewNew: () => {
+                Bin21Tool.viewClear(document.querySelector('#tableArticle02 table'));
                 Bin21Tool.editable({
-                    table   : $('#tableArticle02 table')[0],
+                    table   : document.querySelector('#tableArticle02 table'),
                     name    : 'name',
                     editYn  : true
                 });
-                $('#tableArticle02 #check')[0].value = 'N';
+                document.querySelector('#tableArticle02 #check').value = 'N';
             },
-            viewSave : () => {
-                let check = $('#tableArticle02 #check')[0].value
+            viewSave : async () => {
+                let check = document.querySelector('#tableArticle02 #check').value
                 if(check == 'O') {
-                    AjaxTool.post({
-                        url     : "/ajax/map/board/updateBoard.ajax",
-                        data    : {'boardMap' : Bin21Tool.serializeObject($('#tableArticle02 form')[0])},
-                        type    : 'json',
-                        fn      : (result) => alert(result.message)
+                    await FetchTool.post({
+                        url         : "/fetch/map/board/updateBoard.fetch",
+                        data        : {'boardMap' : Bin21Tool.serializeObject(document.querySelector('#tableArticle02 form'))},
+                        dataType    : 'json',
+                        fn          : (result) => alert(result.message)
                     });
                 } else {
-                    AjaxTool.post({
-                        url     : "/ajax/map/board/insertBoard.ajax",
-                        data    : {'boardMap' : Bin21Tool.serializeObject($('#tableArticle02 form')[0])},
-                        type    : 'json',
-                        fn      : (result) => alert(result.message)
+                    await FetchTool.post({
+                        url         : "/fetch/map/board/insertBoard.fetch",
+                        data        : {'boardMap' : Bin21Tool.serializeObject(document.querySelector('#tableArticle02 form'))},
+                        dataType    : 'json',
+                        fn          : (result) => alert(result.message)
                     });
-                    Bin21Tool.editable({
-                        table   : $('#tableArticle02 table')[0],
+                    await Bin21Tool.editable({
+                        table   : document.querySelector('#tableArticle02 table'),
                         name    : 'name',
                         editYn  : false
                     });
                 }
-                me.getList(me.pageMap.pageNo);
+                await me.getList(me.pageMap.pageNo);
             },
-            viewDelete : () => {
-                let check = $('#tableArticle02 #check')[0].value
+            viewDelete : async () => {
+                let check = document.querySelector('#tableArticle02 #check').value
                 if(check == 'O') {
-                    AjaxTool.post({
-                        url     : "/ajax/map/board/deleteBoard.ajax",
-                        data    : {'boardMap' : Bin21Tool.serializeObject($('#tableArticle02 form')[0])},
-                        type    : 'json',
-                        fn      : (result) => alert(result.message) // me.writeView
+                    await FetchTool.post({
+                        url         : "/fetch/map/board/deleteBoard.fetch",
+                        data        : {'boardMap' : Bin21Tool.serializeObject(document.querySelector('#tableArticle02 form'))},
+                        dataType    : 'json',
+                        fn          : (result) => alert(result.message) // me.writeView
                     });
                 }
-                Bin21Tool.viewClear($('#tableArticle02 table')[0]);
-                me.getList(me.pageMap.pageNo);
+                await Bin21Tool.viewClear(document.querySelector('#tableArticle02 table'));
+                await me.getList(me.pageMap.pageNo);
             },
+
+
         }
     })();
-    $(function() {
-        AMBoard.startUp();
-    });
+    document.addEventListener('DOMContentLoaded', () => FMBoard.startUp());
 </script>
 <body style="margin: 40px; height:calc(100% - 80px);">
 
     <%-- Search 1 --%>
     <article id="searchArticle01" class="com_search_01">
-        <form id="searchForm01" onsubmit="return false">
+        <form id="searchForm01" >
             <div class="date" style="margin-right:30px">
                 <label>시작 일시</label>
                 <input type="date" name="startDate" value="2022-04-01<%--${search.startDate}--%>">
@@ -232,26 +233,26 @@
                     <col style="width:calc(25% - 100px)">
                 </colgroup>
                 <tbody>
-                    <tr>
-                        <th>No</th>
-                        <td><input type="text" name="personSeq" class="readonly" readonly></td>
-                        <th>이름</th>
-                        <td><input type="text" name="name" class="readonly" readonly></td>
-                        <th>나이</th>
-                        <td><input type="text" name="age" placeholder="-"></td>
-                        <th>직업</th>
-                        <td><input type="text" name="job" placeholder="-"></td>
-                    </tr>
-                    <tr>
-                        <th>등록일시</th>
-                        <td><input type="text" name="regDate" class="readonly" readonly></td>
-                        <th>등록자</th>
-                        <td><input type="text" name="regID" class="readonly" readonly></td>
-                        <th>수정일시</th>
-                        <td><input type="text" name="modDate" class="readonly" readonly></td>
-                        <th>수정자</th>
-                        <td><input type="text" name="modID" class="readonly" readonly></td>
-                    </tr>
+                <tr>
+                    <th>No</th>
+                    <td><input type="text" name="personSeq" class="readonly" readonly></td>
+                    <th>이름</th>
+                    <td><input type="text" name="name" class="readonly" readonly></td>
+                    <th>나이</th>
+                    <td><input type="text" name="age" placeholder="-"></td>
+                    <th>직업</th>
+                    <td><input type="text" name="job" placeholder="-"></td>
+                </tr>
+                <tr>
+                    <th>등록일시</th>
+                    <td><input type="text" name="regDate" class="readonly" readonly></td>
+                    <th>등록자</th>
+                    <td><input type="text" name="regID" class="readonly" readonly></td>
+                    <th>수정일시</th>
+                    <td><input type="text" name="modDate" class="readonly" readonly></td>
+                    <th>수정자</th>
+                    <td><input type="text" name="modID" class="readonly" readonly></td>
+                </tr>
                 </tbody>
             </table>
             <input type="hidden" id="check" value="O">

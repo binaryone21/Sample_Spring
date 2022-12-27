@@ -90,6 +90,7 @@ window.PageTool = {
                         div.setAttribute('value', pageNum);
                         div.className = (pageNum == params.pageMap.pageNo) ? 'on' : '';
                     } else {
+                        div.innerText = '';
                         div.setAttribute('value', '0');
                         div.className = 'off';
                     }
