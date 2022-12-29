@@ -59,7 +59,6 @@
                 AjaxTool.post({
                     url     : "/ajax/map/board/selectBoardCount.ajax",
                     data    : { 'searchMap' : Bin21Tool.serializeObject($('#searchArticle01 form')[0]) },
-                    type    : 'json',
                     fn      : (result) => {
                         $('#tableArticle01 .total')[0].innerText = result.total;
                         me.pageMap.total = result.total;
@@ -79,7 +78,6 @@
                         'searchMap' : Bin21Tool.serializeObject($('#searchArticle01 form')[0]),
                         'pageMap'   : me.pageMap
                     },
-                    type    : 'json',
                     fn      : (result) => me.setList(result.boardList)
                 })
             },
@@ -95,7 +93,6 @@
                 AjaxTool.post({
                     url     : "/ajax/map/board/selectBoard.ajax",
                     data    : {'boardMap' : {'personSeq' : personSeq}},
-                    type    : 'json',
                     fn      : (result) => me.setView(result.boardView)
                 })
             },
@@ -106,7 +103,7 @@
                 })
                 Bin21Tool.editable({
                     table   : $('#tableArticle02 table')[0],
-                    name      : 'name',
+                    name    : 'name',
                     editYn  : false,
                 })
                 $('#tableArticle02 #check')[0].value = 'O'
@@ -126,14 +123,12 @@
                     AjaxTool.post({
                         url     : "/ajax/map/board/updateBoard.ajax",
                         data    : {'boardMap' : Bin21Tool.serializeObject($('#tableArticle02 form')[0])},
-                        type    : 'json',
                         fn      : (result) => alert(result.message)
                     });
                 } else {
                     AjaxTool.post({
                         url     : "/ajax/map/board/insertBoard.ajax",
                         data    : {'boardMap' : Bin21Tool.serializeObject($('#tableArticle02 form')[0])},
-                        type    : 'json',
                         fn      : (result) => alert(result.message)
                     });
                     Bin21Tool.editable({
@@ -150,7 +145,6 @@
                     AjaxTool.post({
                         url     : "/ajax/map/board/deleteBoard.ajax",
                         data    : {'boardMap' : Bin21Tool.serializeObject($('#tableArticle02 form')[0])},
-                        type    : 'json',
                         fn      : (result) => alert(result.message) // me.writeView
                     });
                 }

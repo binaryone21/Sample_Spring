@@ -2,8 +2,8 @@ window.AjaxTool = {
     /**
      *
      * @param params.url - '/...'
-     * @param params.data - $('#...').serialize()
-     * @param params.type - 'json', 'html', 'file'
+     * @param params.data - {}(default), $('#...').serialize()
+     * @param params.type - 'json'(default), 'html', 'file'
      * @param params.fn - function() { }
      * @returns {*}
      */
@@ -21,14 +21,14 @@ window.AjaxTool = {
                 error       : (jqXHR, textStatus, errorThrown) => console.log(jqXHR)})
             : $.ajax({
                 url         : params.url,
-                data        : JSON.stringify(params.data),
-                dataType    : params.type,
+                data        : JSON.stringify((params.data) ? params.data : {}),
+                dataType    : (params.type) ? params.type : 'json',
                 type        : 'post',
                 contentType : 'application/json; charset=UTF-8',
                 global      : false,
                 cache       : false,
                 async       : false,
-                success     : (result) => params.fn(result),
+                success     : (result) => ((params.fn) ? params.fn(result) : console.log(result)),
                 error       : (jqXHR, textStatus, errorThrown) => console.log(jqXHR)}),
 
     validation : (params) => {

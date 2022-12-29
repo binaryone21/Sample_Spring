@@ -60,7 +60,6 @@
                 await FetchTool.post({
                     url     : "/fetch/map/board/selectBoardCount.fetch",
                     data    : { 'searchMap' : Bin21Tool.serializeObject(document.querySelector('#searchArticle01 form'))},
-                    dataType : 'json',
                     fn      : (result) => {
                         document.querySelector('#tableArticle01 .total').innerText = result.total;
                         me.pageMap.total = result.total;
@@ -80,7 +79,6 @@
                         'searchMap' : Bin21Tool.serializeObject(document.querySelector('#searchArticle01 form')),
                         'pageMap'   : me.pageMap
                     },
-                    dataType : 'json',
                     fn       : (result) => me.setList(result.boardList)
                 })
             },
@@ -96,7 +94,6 @@
                 FetchTool.post({
                     url         : "/fetch/map/board/selectBoard.fetch",
                     data        : {'boardMap' : {'personSeq' : personSeq}},
-                    dataType    : 'json',
                     fn          : (result) => me.setView(result.boardView)
                 })
             },
@@ -127,14 +124,12 @@
                     await FetchTool.post({
                         url         : "/fetch/map/board/updateBoard.fetch",
                         data        : {'boardMap' : Bin21Tool.serializeObject(document.querySelector('#tableArticle02 form'))},
-                        dataType    : 'json',
                         fn          : (result) => alert(result.message)
                     });
                 } else {
                     await FetchTool.post({
                         url         : "/fetch/map/board/insertBoard.fetch",
                         data        : {'boardMap' : Bin21Tool.serializeObject(document.querySelector('#tableArticle02 form'))},
-                        dataType    : 'json',
                         fn          : (result) => alert(result.message)
                     });
                     await Bin21Tool.editable({
@@ -151,7 +146,6 @@
                     await FetchTool.post({
                         url         : "/fetch/map/board/deleteBoard.fetch",
                         data        : {'boardMap' : Bin21Tool.serializeObject(document.querySelector('#tableArticle02 form'))},
-                        dataType    : 'json',
                         fn          : (result) => alert(result.message) // me.writeView
                     });
                 }
