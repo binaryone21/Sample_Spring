@@ -47,6 +47,28 @@ window.Bin21Tool = {
             }
         }
     },
+    /*
+     * @param params.target - div
+     * @param params.list   - list
+     *
+    setList : (params) => {
+        let target = target;
+
+        while(target.children[1]) {
+            target.children[1].remove();
+        }
+
+        let HTML = target.innerHTML;
+        target.children[0].style.display = 'none';
+
+        for(let item of list) {
+            list.append($(HTML)[0]);
+            let lastChild = target.lastChild;
+            $(lastChild).find('.data-img').attr('src', item.image);
+            $(lastChild).find('.data-name').text(item.name);
+        }
+    }
+     */
     setView : (params) => {
         for(let [key, value] of Object.entries(params.view)) {
             let target = params.table.querySelector('*[name="'+ key +'"]');
