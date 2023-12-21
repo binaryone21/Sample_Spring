@@ -17,7 +17,7 @@ window.AjaxTool = {
                 contentType : false,
                 processData : false,
                 async       : false,
-                success     : (result) => params.fn(result),
+                success     : (result) => ((params.success) ? params.success(result) : console.log(result)),
                 error       : (jqXHR, textStatus, errorThrown) => console.log(jqXHR)})
             : $.ajax({
                 url         : params.url,
@@ -28,7 +28,7 @@ window.AjaxTool = {
                 global      : false,
                 cache       : false,
                 async       : false,
-                success     : (result) => ((params.fn) ? params.fn(result) : console.log(result)),
+                success     : (result) => ((params.success) ? params.success(result) : console.log(result)),
                 error       : (jqXHR, textStatus, errorThrown) => console.log(jqXHR)}),
 
     validation : (params) => {

@@ -1,22 +1,22 @@
 package seunghee.ajax.map.board;
 
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 
 @RequestMapping("/ajax/map/board")
 @Controller
 public class AMBoardController {
+
+    /**
+     * ajax-map 에서 board 로 다 옮기고 board 안에서 하자
+     */
+
 
     @Autowired private AMBoardService service;
 
