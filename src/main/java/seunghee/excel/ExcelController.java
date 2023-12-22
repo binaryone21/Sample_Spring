@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/excel")
 public class ExcelController {
 
-	@Autowired
-	private ExcelService service;
+	@Autowired private ExcelService 		service;
+	@Autowired private ExcelService_MeatBox serviceMeatBox;
 
 	@RequestMapping("/page")
 	public String excel() {
@@ -33,6 +33,6 @@ public class ExcelController {
 
 	@RequestMapping("/download.file")
 	public void ExcelDownload(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		service.downloadExcel(req, res);
+		serviceMeatBox.downloadExcel(req, res);
 	}
 }

@@ -19,7 +19,7 @@ public class ObjectTool {
      * @return	해당Object
      */
     @SuppressWarnings({ "rawtypes" })
-    public static final Object getObject(Object obj, String fldNm) {
+    public static final Object  getObject(Object obj, String fldNm) {
         Object value = null;
 
         try {
