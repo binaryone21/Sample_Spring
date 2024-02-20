@@ -20,21 +20,21 @@
 <body>
 	<section>
 		<h3>템플릿 다운로드</h3>
-		<button type="button" onclick="ExcelTool.downloadTemplate();">다운로드</button>
+		<button type="button" onclick="ExcelMgr.downloadTemplate();">다운로드</button>
 	</section>
 	<section>
 		<h3>템플릿 다운로드, 데이터와 함께</h3>
-		<button type="button" onclick="ExcelTool.downloadTemplateWithData();">다운로드</button>
+		<button type="button" onclick="ExcelMgr.downloadTemplateWithData();">다운로드</button>
 	</section>
 	<section>
 		<h3>미트박스 엑셀 다운로드</h3>
-		<button type="button" onclick="ExcelTool.downloadExcel();">엑셀 다운로드</button>
+		<button type="button" onclick="ExcelMgr.downloadExcel();">엑셀 다운로드</button>
 	</section>
 </body>
 </html>
 
 <script>
-	let me = window.ExcelTool = {
+	let me = window.ExcelMgr = {
 		startup: function() {
 			me.setVariables();
 			me.setEvents();
@@ -74,5 +74,5 @@
 			});
 		}
 	}
-	$(() => ExcelTool.startup());
+	$(() => ExcelMgr.startup());
 </script>
