@@ -3,7 +3,7 @@ package seunghee.image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import seunghee.tools.ImageTool;
+import seunghee.module.ImageModule;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,12 +18,12 @@ public class ImageService {
 
 	/** PDF 다운로드 */
 	public void downloadPDF(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		ImageTool.downloadPDF(req, res);
+		ImageModule.downloadPDF(req, res);
 	}
 
 	/** 이미지 멀티 업로드 */
 	public Map<String, Object> uploadMultiple(MultipartHttpServletRequest req) {
-		List<String> imgPaths = ImageTool.uploadImage(req);
+		List<String> imgPaths = ImageModule.uploadImage(req);
 
 		/**
 		 * todo : 나중에 이부분 List 로 던져서 뒤에서 받는걸로 해보자

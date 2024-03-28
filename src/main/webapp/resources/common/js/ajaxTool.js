@@ -8,7 +8,7 @@ window.AjaxTool = {
      * @returns {*}
      */
     post : (params) =>
-        (params.type == 'file')
+        (params.type === 'file')
             ? $.ajax({
                 url         : params.url,
                 data        : params.data,
@@ -16,7 +16,7 @@ window.AjaxTool = {
                 type        : 'post',
                 contentType : false,
                 processData : false,
-                async       : false,
+                async       : (params.async !== false) ? true : false,
                 success     : (result) => ((params.success) ? params.success(result) : console.log(result)),
                 error       : (jqXHR, textStatus, errorThrown) => console.log(jqXHR)})
             : $.ajax({
@@ -27,7 +27,7 @@ window.AjaxTool = {
                 contentType : 'application/json; charset=UTF-8',
                 global      : false,
                 cache       : false,
-                async       : false,
+                async       : (params.async !== false) ? true : false,
                 success     : (result) => ((params.success) ? params.success(result) : console.log(result)),
                 error       : (jqXHR, textStatus, errorThrown) => console.log(jqXHR)}),
 

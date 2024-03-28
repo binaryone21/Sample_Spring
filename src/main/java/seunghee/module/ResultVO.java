@@ -1,10 +1,12 @@
-package seunghee.tools;
+package seunghee.module;
 
+import lombok.Data;
 import seunghee.common.MapTool;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Data
 public class ResultVO {
     private boolean success = false;
     private String  message = "";
@@ -67,5 +69,4 @@ public class ResultVO {
     public <T> T get(String key, T defaultValue) {
         return MapTool.get(this.data, key, defaultValue);
     }
-
 }

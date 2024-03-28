@@ -1,4 +1,4 @@
-package seunghee.tools;
+package seunghee.module;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
@@ -20,8 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class ExcelTool_MeatBox {
-	private static final Logger logger = LoggerFactory.getLogger(ExcelTool.class);
+public class ExcelModule_MeatBox {
+	private static final Logger logger = LoggerFactory.getLogger(ExcelModule.class);
 
 	/**
 	 * 워크북 포맷이 XSSF 이면 true를 반환.

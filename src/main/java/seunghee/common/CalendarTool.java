@@ -9,6 +9,9 @@ import java.util.Locale;
 
 public class CalendarTool {
 
+    /** 날짜포맷(일자) */
+    public static final String FMT_DATE        = "yyyy-MM-dd";
+
     /** 날짜포맷(일시) */
     public static final String FMT_DATE_TIME    = "yyyy-MM-dd HH:mm:ss";
 

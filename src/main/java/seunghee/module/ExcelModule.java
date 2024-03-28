@@ -1,7 +1,5 @@
-package seunghee.tools;
+package seunghee.module;
 
-import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
@@ -16,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ExcelTool {
-	private static final Logger logger = LoggerFactory.getLogger(ExcelTool.class);
+public class ExcelModule {
+	private static final Logger logger = LoggerFactory.getLogger(ExcelModule.class);
 
 	// 나중에는 Path 를 전역변수로 빼보자 절대 안변하는 상수값인데....
 	static String EXCEL_PATH = "template/excel/";

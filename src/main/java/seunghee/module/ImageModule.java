@@ -1,4 +1,4 @@
-package seunghee.tools;
+package seunghee.module;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ImageTool {
+public class ImageModule {
 
-    private static final Logger logger = LoggerFactory.getLogger(ImageTool.class);
+    private static final Logger logger = LoggerFactory.getLogger(ImageModule.class);
 
     static String IMAGE_PATH = "resources/img/";
 
@@ -50,7 +50,7 @@ public class ImageTool {
      */
     public static List<String> uploadImage(MultipartHttpServletRequest req) {
         List<String> imgPaths = new ArrayList<>();
-        String resourcePath = RequestTool.getResourcePath(req);
+        String resourcePath = RequestModule.getResourcePath(req);
 
         Iterator<String> fileNames = req.getFileNames();
         while(fileNames.hasNext()) {

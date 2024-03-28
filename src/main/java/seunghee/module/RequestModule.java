@@ -1,8 +1,8 @@
-package seunghee.tools;
+package seunghee.module;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RequestTool {
+public class RequestModule {
 
     private static String RESOURCES_PATH = "/src/main/webapp/resources";
 

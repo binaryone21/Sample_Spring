@@ -5,8 +5,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import seunghee.sample.SampleService;
-import seunghee.tools.ExcelTool;
-import seunghee.tools.ExcelTool_MeatBox;
+import seunghee.module.ExcelModule_MeatBox;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +32,7 @@ public class ExcelService_MeatBox {
 		String newExcelFilePath = path + "/tmp/" + System.currentTimeMillis() + ".xls";
 		String templateFilePath = path + "/excel/" + "Sample" + ".xls";
 
-		ExcelTool_MeatBox.writeUsingTemplate(dataList, newExcelFilePath, templateFilePath);
+		ExcelModule_MeatBox.writeUsingTemplate(dataList, newExcelFilePath, templateFilePath);
 
 		String	filePath	= newExcelFilePath;
 		String	fileName	= "Sample.xls";

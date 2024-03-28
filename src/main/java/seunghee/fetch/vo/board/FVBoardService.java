@@ -2,7 +2,7 @@ package seunghee.fetch.vo.board;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import seunghee.tools.ResultVO;
+import seunghee.module.ResultVO;
 
 @Service
 public class FVBoardService {

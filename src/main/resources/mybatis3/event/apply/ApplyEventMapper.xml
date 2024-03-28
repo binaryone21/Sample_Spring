@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApplyEventMapper">
+
+    <select id="selectApplyEventManage"
+            parameterType="seunghee.event.apply.vo.ApplyEventManageSearch"
+            resultType="seunghee.event.apply.entity.ApplyEventManage">
+        SELECT apply_event_seq 		AS "applyEventSeq"
+             , apply_event_name 	AS "applyEventName"
+             , use_yn 				AS "useYn"
+             , start_date 			AS "startDate"
+             , end_date 			AS "endDate"
+             , validation_options 	AS "validationOptionsJson"
+          FROM tb_apply_event_manage
+         WHERE 1=1
+        <if test="applyEventSeq != null and applyEventSeq gt 0">
+            AND APPLY_EVENT_SEQ = #{ applyEventSeq }
+        </if>
+    </select>
+
+    <select id="selectApplyEventGoods"
+            parameterType="seunghee.event.apply.vo.ApplyEventGoodsSearch"
+            resultType="seunghee.event.apply.entity.ApplyEventGoods">
+        /* main.ApplyEventMapper.selectApplyEventGoods */
+        SELECT apply_event_seq 			AS "applyEventSeq"
+             , goods_seq 				AS "goodsSeq"
+             , goods_value 				AS "goodsValue"
+             , goods_name 				AS "goodsName"
+             , goods_contents 			AS "goodsContents"
+             , max_limit 				AS "maxLimit"
+             , min_limit 				AS "minLimist"
+             , current_count 			AS "currentCount"
+             , probability_option 		AS "proBabilityOption"
+             , reg_member_seq 			AS "regMemberSeq"
+             , reg_date 				AS "regDate"
+             , coupon_kind 				AS "couponKind"
+             , coupon_price 			AS "couponPrice"
+             , coupon_min_use_price 	AS "couponMinUsePrice"
+          FROM meatbox.tb_apply_event_goods
+         WHERE 1=1
+        <if test="applyEventSeq != null and applyEventSeq gt 0">
+            AND APPLY_EVENT_SEQ = #{ applyEventSeq }
+        </if>
+        <if test="goodsSeq != null and goodsSeq gt 0">
+            AND GOODS_SEQ = #{ goodsSeq }
+        </if>
+    </select>
+
+    <update id="updateApplyEventGoodsCurrentCount"
+            parameterType="seunghee.event.apply.entity.ApplyEventGoods">
+        /* main.ApplyEventMapper.updateApplyEventGoodsCurrentCount */
+        UPDATE meatbox.tb_apply_event_goods
+           SET current_count = current_count + 1
+         WHERE 1=1
+        <if test="applyEventSeq != null and applyEventSeq gt 0">
+            AND APPLY_EVENT_SEQ = #{ applyEventSeq }
+        </if>
+        <if test="goodsSeq != null and goodsSeq gt 0">
+            AND GOODS_SEQ = #{ goodsSeq }
+        </if>
+    </update>
+
+    <select id="selectApplyEventJoinCount"
+            parameterType="seunghee.event.apply.vo.ApplyEventJoinSearch"
+            resultType="long">
+        SELECT COUNT(*) AS "count"
+          FROM tb_apply_event_join applyEventJoin
+         WHERE 1=1
+        <if test="applyEventSeq != null and applyEventSeq gt 0">
+            AND APPLY_EVENT_SEQ = #{ applyEventSeq }
+        </if>
+        <if test="goodsSeq != null and goodsSeq gt 0">
+            AND GOODS_SEQ = #{ goodsSeq }
+        </if>
+        <if test='memberSeq != null and memberSeq gt 0'>
+            AND member_seq = #{ memberSeq }
+        </if>
+    </select>
+
+    <select id="selectApplyEventJoinLimit"
+            parameterType="seunghee.event.apply.vo.ApplyEventJoinSearch"
+            resultType="long">
+        /* main.ApplyEventMapper.selectApplyEventJoinLimit */
+        SELECT COUNT(*) AS "count"
+          FROM tb_apply_event_join applyEventJoin
+         WHERE 1=1
+           AND apply_event_seq = #{ applyEventSeq }
+        <if test='memberSeq gt 0'>
+            AND member_seq = #{ memberSeq }
+        </if>
+        <if test='@org.apache.commons.lang.StringUtils@isNotBlank(goodsSeq)'>
+            AND goods_seq = #{ goodsSeq }
+        </if>
+        <if test='@org.apache.commons.lang.StringUtils@isNotBlank(userUuid)'>
+            AND user_uuid = #{ userUuid }
+        </if>
+        <if test='@org.apache.commons.lang.StringUtils@isNotBlank(day)'>
+            AND DATE_FORMAT(apply_dt, '%Y-%m-%d') = #{ day }
+        </if>
+        <if test='@org.apache.commons.lang.StringUtils@isNotBlank(startDay) and @org.apache.commons.lang.StringUtils@isNotBlank(endDay)'>
+            AND DATE_FORMAT(apply_dt, '%Y-%m-%d') BETWEEN #{ startDay } and #{ endDay }
+        </if>
+        <if test="@org.apache.commons.lang.StringUtils@equals(reIssue, 'used')">
+            AND EXISTS (SELECT *
+                          FROM tb_coupon
+                         WHERE coupon_status = 'BL02'
+                           AND coupon_member = #{ memberSeq }
+                           AND coupon_master_seq IN (SELECT coupon_master_seq
+                                                       FROM tb_coupon_master
+                                                      WHERE coupon_master_no IN (SELECT goods_value
+                                                                                   FROM tb_apply_event_goods
+                                                                                  WHERE apply_event_seq = #{ applyEventSeq })))
+        </if>
+    </select>
+
+    <insert id="insertApplyEventJoin"
+            parameterType="seunghee.event.apply.entity.ApplyEventJoin">
+        /* main.ApplyEventMapper.insertApplyEventJoin */
+        INSERT INTO tb_apply_event_join (
+              apply_event_seq
+            , member_seq
+            , goods_seq
+            , goods_value
+            , apply_dt
+            , reg_member_seq
+            , reg_date
+        ) VALUES (
+              #{ applyEventSeq }
+            , #{ memberSeq }
+            , #{ goodsSeq }
+            , #{ goodsValue }
+            , NOW()
+            , #{ memberSeq }
+            , NOW()
+        )
+    </insert>
+</mapper>
